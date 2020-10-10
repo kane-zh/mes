@@ -1,0 +1,63 @@
+@media screen and (min-height: 96px) {
+  body {font-family: Verdana;font-size: 5px;}
+}
+@media screen and (min-height: 192px) {
+  body {font-family: Verdana;font-size: 10px;}
+}
+@media screen and (min-height: 288px) {
+  body {font-family: Verdana;font-size: 15px;}/* 16*4.2 */
+}
+@media screen and (min-height: 384px) {
+  body {font-family: Verdana;font-size: 20px;}/* 16*4.2 */
+}
+@media screen and (min-height: 480px) {
+  body {font-family: Verdana;font-size: 25px;}/* 18 *4.6*/
+}
+@media screen and (min-height: 576px) {
+  body {font-family: Verdana;font-size: 30px;}/* 20 *4.6 */
+}
+@media screen and (min-height: 672px) {
+  body {font-family: Verdana;font-size: 35px;}/* 22 *3.03*/
+}
+@media screen and (min-height: 768px) {
+  body {font-family: Verdana;font-size: 40px;}/* 24 */
+}
+@media screen and (min-height: 864px) {
+  body {font-family: Verdana;font-size: 45px;}/* 25 */
+}
+@media screen and (min-height: 960px) {
+  body {font-family: Verdana;font-size: 50px;} /* 28 */
+}
+@media screen and (min-height: 1056px) {
+  body {font-family: Verdana;font-size:55px;}/* 33 */
+}
+@media screen and (min-height: 1152px) {
+  body {font-family: Verdana;font-size:60px;}/* 33 */
+}
+@media screen and (min-height: 1248px) {
+  body {font-family: Verdana;font-size:65px;}/* 33 */
+}
+@media screen and (min-height: 1344px) {
+  body {font-family: Verdana;font-size:70px;}/* 33 */
+}
+@media screen and (min-height: 1400px) {
+  body {font-family: Verdana;font-size:75px;}/* 33 */
+}
+@media screen and (min-height: 1536px) {
+  body {font-family: Verdana;font-size:80px;}/* 33 */
+}
+@media screen and (min-height: 1632px) {
+  body {font-family: Verdana;font-size:85px;}/* 33 */
+}
+@media screen and (min-height: 1728px) {
+  body {font-family: Verdana;font-size:90px;}/* 33 */
+}
+@media screen and (min-height: 1824px) {
+  body {font-family: Verdana;font-size:95px;}/* 33 */
+}
+@media screen and (min-height: 1920px) {
+  body {font-family: Verdana;font-size:100px;}/* 33 */
+}
+*{
+  outline: none;
+}

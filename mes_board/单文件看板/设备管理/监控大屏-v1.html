@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>生产任务看板-v1</title>
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+		<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+		<script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js"></script>
+<!--		<script src="https://cdn.bootcss.com/three.js/100/three.min.js"></script>-->
+		<script src="../static/js/jquery-2.0.3.min.js"></script>
+		<script src="../static/js/three.js"></script>
+		<script src="../static/js/OBJLoader.js"></script>
+		<script src="../static/js/MTLLoader.js"></script>
+		<script src="../static/js/OrbitControls.js"></script>
+		<script src="../static/js/stats.min.js"></script>
+		<script src="../static/js/TrackballControls.js" ></script>
+<!--		<script>-->
+<!--			document.oncontextmenu=new Function("return false")-->
+<!--			document.onselectstart=new Function("return false")-->
+<!--		</script>-->
+	</head>
+	<body>
+		<div id="app">
+			<div class="login" v-if="isLogin===false">
+				<input v-model="formItem.username" >
+				<input v-model="formItem.password" type="password">
+				<submit  @click="login">登录</submit>
+			</div>
+			<div class="title" v-if="isLogin===true">
+              三恩管理驾驶舱
+			</div>
+			<!--生产部分-->
+			<div class="production" v-if="isLogin===true">
+				<div class="name">生产信息</div>
+			</div>
+			<!--计划部分-->
+			<div class="plan" v-if="isLogin===true">
+				<div class="name">计划信息</div>
+				<div class="listTable">
+					<div class="table" id="orderParent">
+						<table id="orderChild">
+							<tr align="center"  type="height:2em">
+								<th>序号</th>
+								<th>订单名称</th>
+								<th>订单编码</th>
+								<th>交付日期</th>
+							</tr>
+							<tr align="center" v-for="(item,index) in orderList" :key="item.id" @click="getOrderDetail(item.id)">
+								<td>{{index}}</td>
+								<td>{{item.name}}</td>
+								<td>{{item.code}}</td>
+								<td>{{item.delivery_time}}</td>
+							</tr>
+							<tr>
+
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div id="orderChart" ></div>
+			</div>
+　　　　　　<!--仓库部分-->
+			<div class="warehouse" v-if="isLogin===true">
+				　　<div class="name">仓库信息</div>
+				<div id="utilization1" ></div>
+				<div id="utilization2" ></div>
+				<div id="materialStock" ></div>
+				<div id="productStock" ></div>
+			</div>
+　　　　　　<!--模型部分-->
+			<div class="model" v-if="isLogin===true">
+				<div class="name">工厂模型</div>
+				<div id="container"></div>
+			</div>
+　　　　　　<!--设备部分-->
+			<div class="equipment" v-if="isLogin===true">
+				<div class="name">设备信息</div>
+				<div class="listTable">
+					<div class="table" id="equipmentParent">
+						<table id="equipmentChild">
+							<tr align="center"  type="height:2em">
+								<th>序号</th>
+								<th>设备名称</th>
+								<th>设备编码</th>
+								<th>状态</th>
+								<th>开机时长</th>
+								<th>运行时长</th>
+								<th>加工数量</th>
+								<th>任务号</th>
+								<th>更新时间</th>
+							</tr>
+							<tr align="center" v-for="(item,index) in equipmentList" :key="item.id" @click="getOrderDetail(item.id)">
+								<td>{{index}}</td>
+								<td>{{item.equipment.name}}</td>
+								<td>{{item.equipment.code}}</td>
+								<td>{{item.type}}</td>
+								<td>{{item.allTime}}</td>
+								<td>{{item.runTime}}</td>
+								<td>{{item.sum}}</td>
+								<td>{{item.task}}</td>
+								<td>{{item.update_time}}</td>
+							</tr>
+							<tr>
+
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	    <script type="text/javascript">
+			var app = new Vue({
+			el: "#app",
+			data: {
+				first:true,
+				imageUrl:'',
+				isLogin:false,
+				scene: '',
+				light: '',
+				camera: '',
+				controls: '',
+				renderer: '',
+				manager:'',
+				object:null,
+				/* 创建页表单项数据 */
+				formItem: {
+					username: '张久奎',
+					password: '123456',
+				},
+				/*订单信息*/
+				orderParent:'',
+				orderChild:'',
+				orderList: [],
+				orderDetail: [],
+				orderChart:'',
+				orderOption:{
+					color: ['#dd6b66','#61c255','#e69d87'],
+					legend: {
+						textStyle: {
+							color: "#fff"
+						}
+					},
+					tooltip: {},
+					dataset: {
+						source: []
+					},
+					xAxis: {type: 'category',
+						axisLine: {  //这是x轴文字颜色
+							lineStyle: {
+								color: "#fff",
+							}
+						}
+					},
+					yAxis:{	axisLine: {  //这是x轴文字颜色
+							lineStyle: {
+								color: "#fff",
+							}
+						}
+					},
+					series: [
+						{type: 'bar'},
+						{type: 'bar'},
+						{type: 'bar'}
+					]
+				},
+				/*设备状态信息*/
+				equipmentList:[],
+				equipmentParent:'',
+				equipmentChild:'',
+				/*获取物料库存详情*/
+				materialStockChart:'',
+				materialStockOption:{
+					color: ['#3398DB'],
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					grid: {
+						left: '3%',
+						right: '4%',
+						bottom: '3%',
+						containLabel: true
+					},
+					xAxis: [
+						{
+							type: 'category',
+							data: [],
+							axisTick: {
+								alignWithLabel: true
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value'
+						}
+					],
+					series: [
+						{
+							name: '直接访问',
+							type: 'bar',
+							barWidth: '60%',
+							data: []
+						}
+					]
+				},
+				/*获取产品库存详情*/
+				productStockChart:'',
+				productStockOption:{
+					color: ['#3398DB'],
+					tooltip: {
+						trigger: 'axis',
+						axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+							type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+						}
+					},
+					grid: {
+						left: '3%',
+						right: '4%',
+						bottom: '3%',
+						containLabel: true
+					},
+					xAxis: [
+						{
+							type: 'category',
+							data: [],
+							axisTick: {
+								alignWithLabel: true
+							}
+						}
+					],
+					yAxis: [
+						{
+							type: 'value'
+						}
+					],
+					series: [
+						{
+							name: '直接访问',
+							type: 'bar',
+							barWidth: '60%',
+							data: []
+						}
+					]
+				},
+				/*仓库利用率*/
+				utilizationChart1:'',
+				utilizationChart2:'',
+				utilizationOption1:{
+					tooltip: {
+						trigger: 'item',
+						formatter: '{a} <br/>{b}: {c} ({d}%)'
+					},
+					legend: {
+						orient: 'vertical',
+						left: 10,
+						data: ['空闲', '占用']
+					},
+					series: [
+						{
+							type: 'pie',
+							name: '原料库',
+							radius: ['50%', '70%'],
+							avoidLabelOverlap: false,
+							label: {
+								show: false,
+								position: 'center'
+							},
+							emphasis: {
+								label: {
+									show: true,
+									fontSize: '30',
+									fontWeight: 'bold'
+								}
+							},
+							labelLine: {
+								show: false
+							},
+							data: [
+								{value: 0, name: '空闲'},
+								{value: 0, name: '占用'},
+							]
+						}
+					]
+				},
+				utilizationOption2:{
+					tooltip: {
+						trigger: 'item',
+						formatter: '{a} <br/>{b}: {c} ({d}%)'
+					},
+					legend: {
+						orient: 'vertical',
+						left: 10,
+						data: ['空闲', '占用']
+					},
+					series: [
+						{
+							type: 'pie',
+							name: '成品库',
+							radius: ['50%', '70%'],
+							avoidLabelOverlap: false,
+							label: {
+								show: false,
+								position: 'center'
+							},
+							emphasis: {
+								label: {
+									show: true,
+									fontSize: '30',
+									fontWeight: 'bold'
+								}
+							},
+							labelLine: {
+								show: false
+							},
+							data: [
+								{value: 0, name: '空闲'},
+								{value: 0, name: '占用'},
+							]
+						}
+					]
+				}
+			},
+			methods: {
+				login() {
+					var self = this
+					axios.post('login', {
+						username: self.formItem.username,
+						password: self.formItem.password
+					}).then(function (response) {
+						axios.defaults.headers.common['Authorization'] = 'JWT ' + response.data.token
+						self.timer()
+						self.isLogin = true
+					}).catch(function (err) {
+						alert('请输入正确的用户名跟密码')
+						console.log(err)
+					})
+				},
+				//初始化three.js相关内容
+				init() {
+					let container = document.getElementById('container')
+					this.camera = new THREE.PerspectiveCamera(30, container.clientWidth / container.clientHeight, 0.01, 10)
+					this.camera.position.z = 0.6
+					this.scene = new THREE.Scene()
+					let geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
+					let material = new THREE.MeshNormalMaterial()
+					this.mesh = new THREE.Mesh(geometry, material)
+					this.scene.add(this.mesh)
+					this.renderer = new THREE.WebGLRenderer({antialias: true})
+					this.renderer.setSize(container.clientWidth, container.clientHeight)
+					container.appendChild(this.renderer.domElement)
+
+					/*以上是demo*/
+					// this.scene = new THREE.Scene();
+					// this.scene.add(new THREE.AmbientLight(0x999999));//环境光
+					// this.light = new THREE.DirectionalLight(0xdfebff, 0.45);//从正上方（不是位置）照射过来的平行光，0.45的强度
+					// this.light.position.set(50, 200, 100);
+					// this.light.position.multiplyScalar(0.3);
+					// this.scene.add(this.light);
+					// //初始化相机
+					// this.camera = new THREE.PerspectiveCamera(70, container.clientWidth / container.clientHeight, 0.01, 10)
+					// this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+					// this.camera.position.set(10, 90, 65);
+					// let geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2)
+					// let material = new THREE.MeshNormalMaterial()
+					// this.mesh = new THREE.Mesh(geometry, material)
+					// this.scene.add(this.mesh)
+					// this.camera.lookAt(this.scene.position);
+					// 初始化控制器
+					// this.controls = new OrbitControls(this.camera);
+					// this.controls.target.set(0, 0, 0);
+					// this.controls.minDistance = 80;
+					// this.controls.maxDistance = 400;
+					// this.controls.maxPolarAngle = Math.PI / 3;
+					// this.controls.update();
+					//渲染
+					// this.renderer = new THREE.WebGLRenderer({alpha: true,antialias: true});
+					// this.renderer.setClearColor(0x000000);
+					// this.renderer.setPixelRatio(window.devicePixelRatio);//为了兼容高清屏幕
+					// this.renderer.setSize(window.innerWidth, window.innerHeight);
+					// this.manager = new THREE.LoadingManager();
+					// const container = document.getElementById('container');
+					// container.appendChild(this.renderer.domElement);
+					// window.addEventListener('resize', this.onWindowResize, false);//添加窗口监听事件（resize-onresize即窗口或框架被重新调整大小）
+				},
+				//窗口监听函数
+				onWindowResize() {
+					this.camera.aspect = window.innerWidth / window.innerHeight;
+					this.camera.updateProjectionMatrix();
+					this.renderer.setSize(window.innerWidth, window.innerHeight);
+				},
+				animate() {
+					requestAnimationFrame(this.animate)
+					this.mesh.rotation.x += 0.01
+					this.mesh.rotation.y += 0.02
+					this.renderer.render(this.scene, this.camera)
+				},
+				//外部模型加载函数
+				loadObj() {
+					// var mtlLoader = new THREE.MTLLoader();					// 模型1
+					// mtlLoader.setPath('../static/models/');							// obj mtl文件的目录
+					// mtlLoader.load('male02.mtl', function(materials) {
+					// 	materials.preload();
+					// 	var objLoader = new THREE.OBJLoader();
+					// 	objLoader.setMaterials(materials);
+					// 	objLoader.setPath('../static/models/');
+					// 	objLoader.load('male02.obj', function(object) {
+					// 		object.position.x = -10;
+					// 		object.position.y = 0;
+					// 		object.position.z = 0;
+					// 		object.scale.set(0.1, 0.05, 0.1);		// 长 高 宽 比例
+					// 		scene.add(object);
+					// 	}, onProgress, onError);
+					// });
+
+					// var loader = new THREE.OBJLoader();
+					//
+					// loader.load( '../static/models/male02.obj', function ( obj ) {
+					//
+					// 	this.object = obj;
+					//
+					// }, onProgress, onError );
+					//包含材质
+					// new MTLLoader.MaterialCreator.setPath('../static/models/').load('male02.mtl', materials => {
+					// 	console.log("materials", materials);
+					// 	materials.preload();
+					// 	new OBJLoader().setMaterials(materials).setPath('../static/models/').load('male02.obj', obj => {
+					// 		obj.scale.set(30, 30, 30);
+					// 		obj.position.set(0, 0, 0);
+					// 		this.scene.add(obj);
+					// 	});
+					// });
+				},
+				/* 获取列表信息 */
+				getOrderList() {
+					this.orderList = [] // 清空列表数据
+					var self = this
+					axios.get('plan/salesOrderCreate/?page_size=99999&ordering=delivery_time&state=使用中').then(function (response) {
+						self.orderList=response.data.results
+						self.getOrderDetail(self.orderList[0].id)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/* 获取详情信息 */
+				getOrderDetail(id) {
+					this.orderDetail = [] // 清空详情数据
+					this.orderOption.dataset.source=[]
+					this.orderOption.dataset.source[0]=['产品','总数量','分配数量','完成数量']
+					var self = this
+					axios.get(`plan/salesOrderCreate/` + id).then(function (response) {
+						self.orderDetail = response.data
+						response.data.child.forEach(function (value, i) {
+							var mydata=[]
+							mydata.push(value.product_code)
+							mydata.push(value.sum)
+							mydata.push(value.assigned)
+							mydata.push(value.completed)
+							self.orderOption.dataset.source.push(mydata)
+						})
+						self.orderChart = echarts.init(document.getElementById('orderChart'))
+						self.orderChart.setOption(self.orderOption)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+
+				},
+		　　    /*获取设备状态信息*/
+		    	getEquipmentState () {
+				this.equipmentList=[]
+				var self = this
+				axios.get('equipment/equipmentState/').then(function (response) {
+					self.equipmentList = response.data.results
+				}).catch(function (err) {
+					if (err.request) {
+						alert(err.request.response)
+					} else {
+						console.log('Error', err.message)
+					}
+				})
+			},
+			    /*获取产品库存详情*/
+				getProductStock(){
+					this.productStockOption.series[0].data=[]
+					this.productStockOption.xAxis[0].data=[]
+					var self = this
+					axios.get(`warehouse/productStockInfor/?warehouse_code=ProductWarehouse`).then(function (response) {
+						response.data.results.forEach(function (value, i) {
+					     self.productStockOption.xAxis[0].data.push(value.product_name)
+							self.productStockOption.series[0].data.push(value.sum)
+						})
+						self.productStockChart = echarts.init(document.getElementById('productStock'))
+						self.productStockChart.setOption(self.productStockOption)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/*获取物料库存详情*/
+				getMaterialStock(){
+					this.materialStockOption.series[0].data=[]
+					this.materialStockOption.xAxis[0].data=[]
+					var self = this
+					axios.get(`warehouse/materialStockInfor/?warehouse_code=PipeWarehouse`).then(function (response) {
+						response.data.results.forEach(function (value, i) {
+							self.materialStockOption.xAxis[0].data.push(value.material_name)
+							self.materialStockOption.series[0].data.push(value.sum)
+						})
+						self.materialStockChart = echarts.init(document.getElementById('materialStock'))
+						self.materialStockChart.setOption(self.materialStockOption)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/*获取仓库利用率*/
+				getUtilization1() {
+					this.utilizationOption1.series[0].data[0]=0
+					this.utilizationOption1.series[0].data[1]=0
+					var self = this
+					axios.get(`warehouse/warehouse/2`).then(function (response) {
+						response.data.warehouse_item.forEach(function (value, i) {
+							if(value.state==="闲置"){
+								self.utilizationOption1.series[0].data[0]+=1
+							}
+							if(value.state==="使用中"){
+								self.utilizationOption1.series[0].data[1]+=1
+							}
+						})
+						self.utilizationChart1 = echarts.init(document.getElementById('utilization1'))
+						self.utilizationChart1.setOption(self.utilizationOption1)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+
+				},
+				getUtilization2() {
+					this.utilizationOption2.series[0].data[0]=0
+					this.utilizationOption2.series[0].data[1]=0
+					var self = this
+					axios.get(`warehouse/warehouse/4`).then(function (response) {
+						response.data.warehouse_item.forEach(function (value, i) {
+							if(value.state==="闲置"){
+								self.utilizationOption2.series[0].data[0]+=1
+							}
+							if(value.state==="使用中"){
+								self.utilizationOption2.series[0].data[1]+=1
+							}
+						})
+						self.utilizationChart2 = echarts.init(document.getElementById('utilization2'))
+						self.utilizationChart2.setOption(self.utilizationOption2)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+
+				},
+				timer() {
+					return setTimeout(() => {
+						this.roll()
+					}, 10000)
+				},
+				roll: function () {
+					this.getOrderList()
+					/*设备信息模块*/
+					if(this.equipmentParent.scrollTop >= this.equipmentChild.scrollHeight-this.equipmentParent.clientHeight) {
+						this.getEquipmentState()
+					} else {
+						this.equipmentParent.scrollTop+=100
+					}
+					this.getMaterialStock()
+				    this.getProductStock()
+					this.getUtilization1()
+					this.getUtilization2()
+					if(this.first===true){
+						this.first=false
+						this.init();
+						this.loadObj();
+						this.animate();
+					}
+					this.timer()
+				}
+			},
+			created() {
+				axios.defaults.timeout = 10000;
+				// 公用地址
+				axios.defaults.baseURL = 'http://119.3.254.254:8000/';
+				// 跨域携带cookie
+				axios.defaults.withCredentials = true;
+				// 给请求头加键值对
+				axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+				this.imageUrl = 'http://pic.yupoo.com/kane-zhang'
+				this.orderParent = document.getElementById('orderParent')
+				this.orderChild = document.getElementById('orderChild')
+				this.equipmentParent = document.getElementById('equipmentParent')
+				this.equipmentChild = document.getElementById('equipmentChild')
+				},
+			})
+		</script>
+		<style>
+			@media screen and (min-height: 96px) {
+				body {font-family: Verdana;font-size: 5px;}
+			}
+			@media screen and (min-height: 192px) {
+				body {font-family: Verdana;font-size: 10px;}
+			}
+			@media screen and (min-height: 288px) {
+				body {font-family: Verdana;font-size: 15px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 384px) {
+				body {font-family: Verdana;font-size: 20px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 480px) {
+				body {font-family: Verdana;font-size: 25px;}/* 18 *4.6*/
+			}
+			@media screen and (min-height: 576px) {
+				body {font-family: Verdana;font-size: 30px;}/* 20 *4.6 */
+			}
+			@media screen and (min-height: 672px) {
+				body {font-family: Verdana;font-size: 35px;}/* 22 *3.03*/
+			}
+			@media screen and (min-height: 768px) {
+				body {font-family: Verdana;font-size: 40px;}/* 24 */
+			}
+			@media screen and (min-height: 864px) {
+				body {font-family: Verdana;font-size: 45px;}/* 25 */
+			}
+			@media screen and (min-height: 960px) {
+				body {font-family: Verdana;font-size: 50px;} /* 28 */
+			}
+			@media screen and (min-height: 1056px) {
+				body {font-family: Verdana;font-size:55px;}/* 33 */
+			}
+			@media screen and (min-height: 1152px) {
+				body {font-family: Verdana;font-size:60px;}/* 33 */
+			}
+			@media screen and (min-height: 1248px) {
+				body {font-family: Verdana;font-size:65px;}/* 33 */
+			}
+			@media screen and (min-height: 1344px) {
+				body {font-family: Verdana;font-size:70px;}/* 33 */
+			}
+			@media screen and (min-height: 1400px) {
+				body {font-family: Verdana;font-size:75px;}/* 33 */
+			}
+			@media screen and (min-height: 1536px) {
+				body {font-family: Verdana;font-size:80px;}/* 33 */
+			}
+			@media screen and (min-height: 1632px) {
+				body {font-family: Verdana;font-size:85px;}/* 33 */
+			}
+			@media screen and (min-height: 1728px) {
+				body {font-family: Verdana;font-size:90px;}/* 33 */
+			}
+			@media screen and (min-height: 1824px) {
+				body {font-family: Verdana;font-size:95px;}/* 33 */
+			}
+			@media screen and (min-height: 1920px) {
+				body {font-family: Verdana;font-size:100px;}/* 33 */
+			}
+			*{
+				outline: none;
+			}
+			#app{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				background-image: url(http://pic.yupoo.com/kane-zhang/9b0b7474/f956c8d1.jpg);
+			}
+			.login{
+				position: absolute;
+				top: 6%;
+				width: 100%;
+				height: 94%;
+				overflow: scroll;
+				background: #252531;
+				text-align: center;
+				color: white;
+				font-weight: 300;
+				font-size: 1.1rem;
+			}
+			.title{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 10%;
+				width: 100%;
+				font-size: 1.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 1em;
+				text-align: center;
+				color: rgba(216, 216, 216, 0.39);
+			}
+			.production{
+				position: absolute;
+				top: 10%;
+				left: 0;
+				height: 45%;
+				width: 33%;
+			}
+			.production .name{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 10%;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 1em;
+				color: #FF5C5D5D;
+			}
+			.plan{
+				position: absolute;
+				top: 10%;
+				left: 20%;
+				height: 45%;
+				width: 60%;
+			}
+			.plan .name{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 10%;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 1em;
+				color: #FF5C5D5D;
+			}
+			.plan .listTable{
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 40%;
+			}
+			.plan .listTable .table{
+				height: 100%;
+				width: 100%;
+				overflow: auto;
+			}
+			.plan .listTable .table table{
+				height: 100%;
+				width: 100%;
+				/*table-layout: fixed;*/
+				empty-cells:hide;
+			}
+			.plan .listTable .table  th{
+				position: sticky;
+				top:0;
+				height: 1.5em;
+				font-family: PingFangSC-Regular;
+				font-size: 0.5em;
+				color: #ffffff;
+				text-align: center;
+				letter-spacing: -0.45px;
+				background: #091649;
+			}
+			.plan .listTable .table  td{
+				height: 1em;
+				font-family: PingFangSC-Regular;
+				font-size: 0.4em;
+				color: #ffffff;
+				letter-spacing: -0.45px;
+				text-align: center;
+				/*background: #ffffff;*/
+				border:1px solid #999;
+			}
+			.plan #orderChart{
+				position: absolute;
+				top: 50%;
+				left: 0;
+				height: 50%;
+				width: 100%;
+			}
+			.warehouse{
+				position: absolute;
+				top: 10%;
+				right: 0;
+				height: 90%;
+				width: 20%;
+			}
+			.warehouse .name{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 10%;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 1em;
+				color: #FF5C5D5D;
+			}
+			.warehouse #utilization1{
+				position: absolute;
+				top: 10%;
+				left: 0;
+				height: 30%;
+				width: 50%;
+			}
+			.warehouse #utilization2{
+				position: absolute;
+				top: 10%;
+				left: 50%;
+				height: 30%;
+				width: 50%;
+			}
+			.warehouse #materialStock{
+				position: absolute;
+				bottom: 30%;
+				left: 0;
+				height: 30%;
+				width: 100%;
+			}
+			.warehouse #productStock{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 30%;
+				width: 100%;
+			}
+			.equipment{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 45%;
+				width: 20%;
+			}
+			.equipment .name{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 10%;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 1em;
+				color: #FF5C5D5D;
+			}
+			.equipment .listTable{
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 90%;
+			}
+			.equipment .listTable .table{
+				height: 100%;
+				width: 100%;
+				overflow: auto;
+			}
+			.equipment .listTable .table table{
+				height: 100%;
+				width: 100%;
+				/*table-layout: fixed;*/
+				empty-cells:hide;
+			}
+			.equipment .listTable .table  th{
+				position: sticky;
+				top:0;
+				height: 1.5em;
+				font-family: PingFangSC-Regular;
+				font-size: 0.5em;
+				color: #ffffff;
+				text-align: center;
+				letter-spacing: -0.45px;
+				background: #091649;
+			}
+			.equipment .listTable .table  td{
+				height: 1em;
+				font-family: PingFangSC-Regular;
+				font-size: 0.4em;
+				color: #ffffff;
+				letter-spacing: -0.45px;
+				text-align: center;
+				/*background: #ffffff;*/
+				border:1px solid #999;
+			}
+			.model{
+				position: absolute;
+				bottom: 0;
+				left: 22%;
+				height: 45%;
+				width: 55%;
+			}
+			.model .name{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 10%;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 1em;
+				color: #FF5C5D5D;
+			}
+			#container {
+				height: 400px;
+			}
+		</style>
+	</body>
+</html>

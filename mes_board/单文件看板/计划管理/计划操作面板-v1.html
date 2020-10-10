@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>计划操作面板-v1</title>
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+		<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+		<script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js"></script>
+		<script>
+			document.oncontextmenu=new Function("return false")
+			document.onselectstart=new Function("return false")
+		</script>
+	</head>
+	<body >
+		<div id="app" >
+			<div class="top">
+				<img src="http://pic.yupoo.com/kane-zhang/1fa60e5b/83a00ed8.png" />
+				<span>计划操作面板-v1 Production task board</span>
+			</div>
+			<div class="login" v-if="isLogin===false">
+				<input v-model="formItem.username" >
+				<input v-model="formItem.password" type="password">
+				<submit  @click="login">登录</submit>
+			</div>
+			<div class="main" v-if="isLogin===true">
+				<div class="main_t">
+					<label><img src="http://pic.yupoo.com/kane-zhang/bca2a5e6/bd1eafa0.png">生产任务信息</label>
+					<div class="table">
+						<table>
+							<thead>
+							<tr align="center">
+								<th>任务名称</th>
+								<th>任务编码</th>
+								<th>优先级</th>
+								<th>交付日期</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr align="center" v-for="item in list" :key="item.id" @click="getDetail(item.id)">
+								<td>{{item.name}}</td>
+								<td>{{item.code}}</td>
+								<td>{{item.priority}}</td>
+								<td>{{item.delivery_time}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="main_b">
+						<label><img src="http://pic.yupoo.com/kane-zhang/bca2a5e6/bd1eafa0.png">生产任务明细
+						</label>
+						<div class="table" id="parent" >
+							<table id="child">
+								<thead>
+									<tr align="center">
+										<th>订单名称</th>
+										<th>订单编码</th>
+										<th>产品类型名称</th>
+										<th>产品类型编码</th>
+										<th>产品名称</th>
+										<th>产品编码</th>
+										<th>生产线路类型名称</th>
+										<th>生产线路类型编码</th>
+										<th>生产线路名称</th>
+										<th>生产线路编码</th>
+										<th>状态</th>
+										<th>总数量</th>
+										<th>完成数量</th>
+										<th>操作</th>
+										<th>加工数量</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr align="center" v-for="item in detail.child" :key="item.id">
+										<td>{{item.salesOrderItem.salesOrderItem_parent[0].name}}</td>
+										<td>{{item.salesOrderItem.salesOrderItem_parent[0].code}}</td>
+										<td>{{item.salesOrderItem.productType_name}}</td>
+										<td>{{item.salesOrderItem.productType_code}}</td>
+										<td>{{item.salesOrderItem.product_name}}</td>
+										<td>{{item.salesOrderItem.product_code}}</td>
+										<td>{{item.routeType_name}}</td>
+										<td>{{item.routeType_code}}</td>
+										<td>{{item.route_name}}</td>
+										<td>{{item.route_code}}</td>
+										<td>{{item.state}}</td>
+										<td>{{item.sum}}</td>
+										<td>{{item.completed}}</td>
+										<td>
+											<button @click="changeState(item.id,'挂起')" v-if="item.state==='等待' || item.state==='加工中'">挂起</button>
+											<button @click="changeState(item.id,'等待')" v-if="item.state==='挂起'">解挂</button>
+											<button @click="changeState(item.id,'加工中')" v-if="item.state==='等待'">开始</button>
+											<button @click="changeState(item.id,'等待')" v-if="item.state==='加工中'">停止</button>
+<!--											<button @click="changeState(item.id,'终止')" v-if="item.state==='等待' || item.state==='加工中' || item.state==='挂起'">终止</button>-->
+										</td>
+										<td>
+											<input type="number" v-model="item.count" style="width: 4em" max="{{parseInt(item.sum)-parseInt(item.completed)}}">
+											<button @click="changeSum(item.id,parseInt(item.count)+item.completed)" v-if="item.state==='加工中'">提交</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+			</div>
+		</div>
+	    <script type="text/javascript">
+			var app = new Vue({
+			el: "#app",
+			data: {
+				isLogin:false,
+				/* 创建页表单项数据 */
+				formItem: {
+					username: 'admin',
+					password: 'admin123',
+				},
+				/* 列表页数据 */
+				list: [],
+				/* 详情页数据 */
+				detail: [],
+				parent:'',
+				child:'',
+				completed: 0,
+				currentId:'',
+			},
+			methods: {
+				login() {
+					var self = this
+					axios.post('login', {
+						username: self.formItem.username,
+						password: self.formItem.password
+					}).then(function (response) {
+						axios.defaults.headers.common['Authorization'] = 'JWT ' + response.data.token
+						self.getList()
+						self.isLogin = true
+					}).catch(function (err) {
+						alert('请输入正确的用户名跟密码')
+						console.log(err)
+					})
+				},
+				/* 获取列表信息 */
+				getList() {
+					this.list = [] // 清空列表数据
+					var self = this
+					axios.get('plan/productTaskCreate/?page_size=99999&ordering=delivery_time&state=使用中').then(function (response) {
+						response.data.results.forEach(function (value, i) {
+							if (value.priority === '紧急')
+								self.list.push(value)
+						})
+						response.data.results.forEach(function (value, i) {
+							if (value.priority === '优先')
+								self.list.push(value)
+						})
+						response.data.results.forEach(function (value, i) {
+							if (value.priority === '正常')
+								self.list.push(value)
+						})
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/* 获取详情信息 */
+				getDetail(id) {
+					this.detail = [] // 清空详情数据
+					this.currentId = id
+					var self = this
+					axios.get(`plan/productTaskCreate/` + id).then(function (response) {
+						self.detail = response.data
+						self.parent = document.getElementById('parent')
+						self.child = document.getElementById('child')
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+
+				},
+				/* 改变数据项状态 */
+				changeState (id,state) {
+					var self = this
+					axios.patch(`plan/productTaskItemCreate/` + id + '/', {
+						state: state
+					}).then(function (response
+					) {
+						alert('数据提交成功')
+						self.getList()
+						self.getDetail(self.currentId)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/* 改变数据项状态 */
+				changeSum (id,sum) {
+					if (sum===null){
+						sum=0
+					}
+					var self = this
+					axios.patch(`plan/productTaskItemCreate/` + id + '/', {
+						completed:sum
+					}).then(function (response
+					) {
+						alert('数据提交成功')
+						self.completed=0
+						self.getList()
+						self.getDetail(self.currentId)
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				}
+			},
+			created() {
+				axios.defaults.timeout = 10000;
+				// 公用地址
+				axios.defaults.baseURL = 'http://114.116.237.76:8000/';
+				// 跨域携带cookie
+				axios.defaults.withCredentials = true;
+				// 给请求头加键值对
+				axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+			},
+			mounted(){
+				this.login()
+			}
+		})
+	</script>
+		<style>
+			@media screen and (min-height: 96px) {
+				body {font-family: Verdana;font-size: 5px;}
+			}
+			@media screen and (min-height: 192px) {
+				body {font-family: Verdana;font-size: 10px;}
+			}
+			@media screen and (min-height: 288px) {
+				body {font-family: Verdana;font-size: 15px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 384px) {
+				body {font-family: Verdana;font-size: 20px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 480px) {
+				body {font-family: Verdana;font-size: 25px;}/* 18 *4.6*/
+			}
+			@media screen and (min-height: 576px) {
+				body {font-family: Verdana;font-size: 30px;}/* 20 *4.6 */
+			}
+			@media screen and (min-height: 672px) {
+				body {font-family: Verdana;font-size: 35px;}/* 22 *3.03*/
+			}
+			@media screen and (min-height: 768px) {
+				body {font-family: Verdana;font-size: 40px;}/* 24 */
+			}
+			@media screen and (min-height: 864px) {
+				body {font-family: Verdana;font-size: 45px;}/* 25 */
+			}
+			@media screen and (min-height: 960px) {
+				body {font-family: Verdana;font-size: 50px;} /* 28 */
+			}
+			@media screen and (min-height: 1056px) {
+				body {font-family: Verdana;font-size:55px;}/* 33 */
+			}
+			@media screen and (min-height: 1152px) {
+				body {font-family: Verdana;font-size:60px;}/* 33 */
+			}
+			@media screen and (min-height: 1248px) {
+				body {font-family: Verdana;font-size:65px;}/* 33 */
+			}
+			@media screen and (min-height: 1344px) {
+				body {font-family: Verdana;font-size:70px;}/* 33 */
+			}
+			@media screen and (min-height: 1400px) {
+				body {font-family: Verdana;font-size:75px;}/* 33 */
+			}
+			@media screen and (min-height: 1536px) {
+				body {font-family: Verdana;font-size:80px;}/* 33 */
+			}
+			@media screen and (min-height: 1632px) {
+				body {font-family: Verdana;font-size:85px;}/* 33 */
+			}
+			@media screen and (min-height: 1728px) {
+				body {font-family: Verdana;font-size:90px;}/* 33 */
+			}
+			@media screen and (min-height: 1824px) {
+				body {font-family: Verdana;font-size:95px;}/* 33 */
+			}
+			@media screen and (min-height: 1920px) {
+				body {font-family: Verdana;font-size:100px;}/* 33 */
+			}
+			*{
+				outline: none;
+			}
+			#app{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+			}
+			.top {
+				position: absolute;
+				top: 0;
+				height: 6%;
+				width: 100%;
+				background: rgba(30, 30, 30, 0.6);
+				color: #ffffff;
+				letter-spacing: 0.19px;
+				text-shadow: 0 2px 4px rgba(255, 255, 255, 0.20);
+			}
+			.top img {
+              position: relative;
+			  height: 100%;
+			}
+			.top span {
+				position: absolute;
+				right: 0;
+				height: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				margin-right: 3em;
+				line-height: 2em;
+			}
+			.login{
+				position: absolute;
+				top: 6%;
+				width: 100%;
+				height: 94%;
+				overflow: scroll;
+				background: #252531;
+				text-align: center;
+				color: white;
+				font-weight: 300;
+				font-size: 1.1rem;
+			}
+			.main {
+				position: absolute;
+				top: 6%;
+				width: 100%;
+				height: 94%;
+				background-image: url(http://pic.yupoo.com/kane-zhang/9b0b7474/f956c8d1.jpg);
+			}
+			.main_t {
+				position: absolute;
+				width: 98%;
+				height: 48%;
+				top: 0%;
+				border-radius: 8px;
+				margin: 1%;
+			}
+			.main_t label{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+				text-align: center;
+				display: inline-block;
+			}
+			.main_t .table {
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 80%;
+				border-collapse: collapse;
+				overflow: auto;
+				border: 1px solid #eeeeee;
+			}
+			.main_t .table table{
+				position: relative;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				empty-cells:hide;
+			}
+			.main_t .table th {
+				position: sticky;
+				top: 0;
+				height: 2em;
+				background: #4d4d56;
+				border-bottom: 1px solid #eeeeee;
+				font-size: 0.4em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+			}
+			.main_t .table td {
+				height: 1em;
+				font-size: 0.4em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+			}
+			.main_b {
+				position: absolute;
+				width: 98%;
+				height: 48%;
+				top: 50%;
+				border-radius: 8px;
+				margin: 1%;
+			}
+			.main_b label{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+				text-align: center;
+				display: inline-block;
+			}
+			.main_b .table {
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 80%;
+				border-collapse: collapse;
+				overflow: auto;
+				border: 1px solid #eeeeee;
+			}
+            .main_b .table table{
+				position: relative;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.main_b .table th {
+				position: sticky;
+				top: 0;
+				background: #4d4d56;
+				border-bottom: 1px solid #eeeeee;
+				font-size: 0.4em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+			}
+			.main_b .table td {
+				font-size: 0.4em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+			}
+		</style>
+	</body>
+</html>

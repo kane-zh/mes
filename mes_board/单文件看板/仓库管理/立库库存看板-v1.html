@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>立库库存看板-v1</title>
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+		<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+<!--		<script>-->
+<!--			document.oncontextmenu=new Function("return false")-->
+<!--			document.onselectstart=new Function("return false")-->
+<!--		</script>-->
+	</head>
+	<body>
+		<div id="app">
+			<div class="top">
+				<img src="http://pic.yupoo.com/kane-zhang/1fa60e5b/83a00ed8.png" />
+				<span>管材库存看板-v1 Production task board</span>
+			</div>
+			<div class="login" v-if="isLogin===false">
+				<input v-model="formItem.username" >
+				<input v-model="formItem.password" type="password">
+				<submit  @click="login">登录</submit>
+			</div>
+			<div class="materialStock" v-if="isLogin===true">
+					<div class="modelSelect">
+						<button @click="changeMode">{{btTitle}}</button>
+					</div>
+					<!-- 列表页显示-->
+					<div  class="list"  v-if="showViewid==='list'">
+						<div class="listHead">
+							<form class="search">
+								<label>搜索参数:
+									<input v-model="searchValue" type="text" placeholder="  请输入要搜索的信息...">
+								</label>
+								<button type='button' @click="search_list">搜索</button>
+								<button type='button' @click="showListView">重置</button>
+							</form>
+							<form class="ordering">
+								<label>
+									<input value="id" type="radio" name ="ordering" v-model="ordering">
+									添加时间-正排序
+								</label>
+								<label>
+									<input value="-id" type="radio" name ="ordering" v-model="ordering">
+									添加时间-倒排序
+								</label>
+								<label>
+									<input value="update_time" type="radio" name ="ordering" v-model="ordering">
+									更新时间-正排序
+								</label>
+								<label>
+									<input value="-update_time" type="radio" name ="ordering" v-model="ordering">
+									更新时间-倒排序
+								</label>
+							</form>
+						</div>
+						<div class="listTable">
+							<div class="table">
+								<table >
+									<tr align="center" >
+										<th>序号</th>
+										<th>仓库名称</th>
+										<th>物料类型名称</th>
+										<th>物料编码</th>
+										<th>库存数量</th>
+										<th>批次</th>
+									</tr>
+									<tr align="center" v-for="(item,index) in list" :key="item.id" >
+										<td>{{index+1}}</td>
+										<td>{{item.warehouse_name}}</td>
+										<td>{{item.materialType_name}}</td>
+										<td>{{item.material_code}}</td>
+										<td>{{item.sum}}</td>
+										<td>{{item.batch}}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="page">
+								<label>总共：{{listCount}}</label>
+								<button  @click="listPre" v-if="listPreUrl!==''">上一页</button>
+								<button  @click="listNext" v-if="listNextUrl!==''">下一页</button>
+							</div>
+						</div>
+					</div>
+					<!-- 详情页显示-->
+					<div  class="detail"  v-if="showViewid==='detail'">
+						<div class="listHead">
+							<form class="search">
+								<label>搜索参数:
+									<input v-model="searchValue" type="text" placeholder="  请输入要搜索的信息...">
+								</label>
+								<button type='button' @click="search_Detail">搜索</button>
+								<button type='button' @click="showDetailView">重置</button>
+							</form>
+							<form class="ordering">
+								<label>
+									<input value="id" type="radio" name ="ordering" v-model="ordering">
+									添加时间-正排序
+								</label>
+								<label>
+									<input value="-id" type="radio" name ="ordering" v-model="ordering">
+									添加时间-倒排序
+								</label>
+								<label>
+									<input value="update_time" type="radio" name ="ordering" v-model="ordering">
+									更新时间-正排序
+								</label>
+								<label>
+									<input value="-update_time" type="radio" name ="ordering" v-model="ordering">
+									更新时间-倒排序
+								</label>
+							</form>
+						</div>
+						<div class="listTable">
+							<div class="table">
+								<table >
+									<tr align="center" >
+										<th>序号</th>
+										<th>仓库名称</th>
+										<th>仓位编码</th>
+										<th>物料类型名称</th>
+										<th>物料编码</th>
+										<th>库存数量</th>
+										<th>批次</th>
+										<th>状态</th>
+									</tr>
+									<tr align="center" v-for="(item,index) in list" :key="item.id" >
+										<td>{{index+1}}</td>
+										<td>{{item.warehouse_name}}</td>
+										<td>{{item.position_code}}</td>
+										<td>{{item.materialType_name}}</td>
+										<td>{{item.material_code}}</td>
+										<td>{{item.sum}}</td>
+										<td>{{item.batch}}</td>
+										<td>{{item.state}}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="page">
+								<label>总共：{{listCount}}</label>
+								<button  @click="listPre" v-if="listPreUrl!==''">上一页</button>
+								<button  @click="listNext" v-if="listNextUrl!==''">下一页</button>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	    <script type="text/javascript">
+			var app = new Vue({
+			el: "#app",
+			data: {
+				isLogin:false,
+				/* 视图显示控制 */
+				showViewid: 'list',
+				btTitle: '列表模式',
+				/* 列表查询参数 */
+				searchValue: '',
+				/* 列表页数据排序 */
+				ordering: '-id',
+				/* 列表页数据 */
+				list: [],
+				listCount: 0,
+				listPreUrl: '',
+				listNextUrl: '',
+				/* 创建页表单项数据 */
+				formItem: {
+					username: '张久奎',
+					password: '123433',
+					id: '',
+					name: '',
+					code: '',
+					type: '',
+					position: null,
+					material: null,
+					batch: '',
+					handler: '',
+					sum: '',
+					dataTime: '',
+					state: '',
+					file: [],
+					alter: [],
+					desc: '',
+					auditor: ''
+				}
+			},
+			methods: {
+				login() {
+					var self = this
+					axios.post('login', {
+						username: self.formItem.username,
+						password: self.formItem.password
+					}).then(function (response) {
+						axios.defaults.headers.common['Authorization'] = 'JWT ' + response.data.token;
+						self.isLogin = true
+						self.showListView()
+					}).catch(function (err) {
+						alert('请输入正确的用户名跟密码')
+						console.log(err)
+					})
+				},
+				/* 显示列表视图 */
+				showListView: function () {
+					this.list = [] // 清空列表数据
+					this.listCount=0
+					this.listPreUrl = ''
+					this.listNextUrl = ''
+					this.searchValue = ''
+					var self = this
+					axios.get('warehouse/materialStockInfor/?ordering=' + self.ordering).then(function (response) {
+						self.list = response.data.results
+						self.listCount = response.data.count
+						if (response.data.next !== null) {
+							self.listNextUrl = response.data.next.replace(axios.defaults.baseURL, '')
+						}
+						if (response.data.previous !== null) {
+							self.listPreUrl = response.data.previous.replace(axios.defaults.baseURL, '')
+						}
+						self.showViewid = 'list'
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/* 列表搜索数据 */
+				search_list () {
+					this.list = [] // 清空列表数据
+					this.listCount = 0
+					this.listPreUrl = ''
+					this.listNextUrl = ''
+					var self = this
+					axios.get('warehouse/materialStockInfor/?search=' + self.searchValue +
+							'&ordering=' + self.ordering).then(function (response) {
+						self.list = response.data.results
+						self.listCount = response.data.count
+						if (response.data.next !== null) {
+							self.listNextUrl = response.data.next.replace(axios.defaults.baseURL, '')
+						}
+						if (response.data.previous !== null) {
+							self.listPreUrl = response.data.previous.replace(axios.defaults.baseURL, '')
+						}
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+
+				/* 显示详情视图 */
+				showDetailView: function () {
+					this.list = [] // 清空列表数据
+					this.listCount=0
+					this.listPreUrl = ''
+					this.listNextUrl = ''
+					this.searchValue = ''
+					var self = this
+					axios.get('warehouse/materialStockDetail/?ordering='+ self.ordering+'&state=使用中').then(function (response) {
+						self.list = response.data.results
+						self.listCount = response.data.count
+						if (response.data.next !== null) {
+							self.listNextUrl = response.data.next.replace(axios.defaults.baseURL, '')
+						}
+						if (response.data.previous !== null) {
+							self.listPreUrl = response.data.previous.replace(axios.defaults.baseURL, '')
+						}
+						self.showViewid = 'detail'
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/* 详情搜索数据 */
+				search_Detail () {
+					this.list = [] // 清空列表数据
+					this.listCount = 0
+					this.listPreUrl = ''
+					this.listNextUrl = ''
+					var self = this
+					axios.get('warehouse/materialStockDetail/?search=' + self.searchValue +'&state=使用中'+
+							'&ordering=' + self.ordering).then(function (response) {
+						self.list = response.data.results
+						self.listCount = response.data.count
+						if (response.data.next !== null) {
+							self.listNextUrl = response.data.next.replace(axios.defaults.baseURL, '')
+						}
+						if (response.data.previous !== null) {
+							self.listPreUrl = response.data.previous.replace(axios.defaults.baseURL, '')
+						}
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				listPre () {
+					this.list = [] // 清空列表数据
+					var self = this
+					axios.get(this.listPreUrl).then(function (response) {
+						self.listPreUrl = ''
+						self.listNextUrl = ''
+						self.list = response.data.results
+						if (response.data.next !== null) {
+							self.listNextUrl = response.data.next.replace(axios.defaults.baseURL, '')
+						}
+						if (response.data.previous !== null) {
+							self.listPreUrl = response.data.previous.replace(axios.defaults.baseURL, '')
+						}
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				listNext () {
+					this.list = [] // 清空列表数据
+					var self = this
+					axios.get(this.listNextUrl).then(function (response) {
+						self.listPreUrl = ''
+						self.listNextUrl = ''
+						self.list = response.data.results
+						if (response.data.next !== null) {
+							self.listNextUrl = response.data.next.replace(axios.defaults.baseURL, '')
+						}
+						if (response.data.previous !== null) {
+							self.listPreUrl = response.data.previous.replace(axios.defaults.baseURL, '')
+						}
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/* 改变列表显示模式 */
+				changeMode () {
+					if (this.showViewid === 'detail') {
+						this.btTitle = '详情模式'
+						this.showListView()
+					} else if (this.showViewid === 'list') {
+						this.btTitle = '列表模式'
+						this.showDetailView()
+					}
+				}
+			},
+				created () {
+					axios.defaults.timeout = 10000;
+					// 公用地址
+					axios.defaults.baseURL = 'http://119.3.254.254:8000/';
+					// 跨域携带cookie
+					axios.defaults.withCredentials = true;
+					// 给请求头加键值对
+					axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+				}
+		})
+	</script>
+		<style>
+			@media screen and (min-height: 96px) {
+				body {font-family: Verdana;font-size: 5px;}
+			}
+			@media screen and (min-height: 192px) {
+				body {font-family: Verdana;font-size: 10px;}
+			}
+			@media screen and (min-height: 288px) {
+				body {font-family: Verdana;font-size: 15px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 384px) {
+				body {font-family: Verdana;font-size: 20px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 480px) {
+				body {font-family: Verdana;font-size: 25px;}/* 18 *4.6*/
+			}
+			@media screen and (min-height: 576px) {
+				body {font-family: Verdana;font-size: 30px;}/* 20 *4.6 */
+			}
+			@media screen and (min-height: 672px) {
+				body {font-family: Verdana;font-size: 35px;}/* 22 *3.03*/
+			}
+			@media screen and (min-height: 768px) {
+				body {font-family: Verdana;font-size: 40px;}/* 24 */
+			}
+			@media screen and (min-height: 864px) {
+				body {font-family: Verdana;font-size: 45px;}/* 25 */
+			}
+			@media screen and (min-height: 960px) {
+				body {font-family: Verdana;font-size: 50px;} /* 28 */
+			}
+			@media screen and (min-height: 1056px) {
+				body {font-family: Verdana;font-size:55px;}/* 33 */
+			}
+			@media screen and (min-height: 1152px) {
+				body {font-family: Verdana;font-size:60px;}/* 33 */
+			}
+			@media screen and (min-height: 1248px) {
+				body {font-family: Verdana;font-size:65px;}/* 33 */
+			}
+			@media screen and (min-height: 1344px) {
+				body {font-family: Verdana;font-size:70px;}/* 33 */
+			}
+			@media screen and (min-height: 1400px) {
+				body {font-family: Verdana;font-size:75px;}/* 33 */
+			}
+			@media screen and (min-height: 1536px) {
+				body {font-family: Verdana;font-size:80px;}/* 33 */
+			}
+			@media screen and (min-height: 1632px) {
+				body {font-family: Verdana;font-size:85px;}/* 33 */
+			}
+			@media screen and (min-height: 1728px) {
+				body {font-family: Verdana;font-size:90px;}/* 33 */
+			}
+			@media screen and (min-height: 1824px) {
+				body {font-family: Verdana;font-size:95px;}/* 33 */
+			}
+			@media screen and (min-height: 1920px) {
+				body {font-family: Verdana;font-size:100px;}/* 33 */
+			}
+			*{
+				outline: none;
+			}
+			#app{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+			}
+			.top {
+				position: absolute;
+				top: 0;
+				height: 6%;
+				width: 100%;
+				background: rgba(30, 30, 30, 0.6);
+				color: #ffffff;
+				letter-spacing: 0.19px;
+				text-shadow: 0 2px 4px rgba(255, 255, 255, 0.20);
+			}
+			.top img {
+              position: relative;
+			  height: 100%;
+			}
+			.top span {
+				position: absolute;
+				right: 0;
+				height: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				margin-right: 3em;
+				line-height: 2em;
+			}
+			.login{
+				position: absolute;
+				top: 6%;
+				width: 100%;
+				height: 94%;
+				overflow: scroll;
+				background: #252531;
+				text-align: center;
+				color: white;
+				font-weight: 300;
+				font-size: 1.1rem;
+			}
+			.materialStock{
+				position: relative;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-image: url(http://pic.yupoo.com/kane-zhang/9b0b7474/f956c8d1.jpg);
+			}
+			.modelSelect{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 5%;
+				font-family: PingFangSC-Regular;
+				font-size: 0.3em;
+				line-height: 2em;
+				color: #151515;
+				letter-spacing: -0.45px;
+			}
+			.modelSelect button{
+				position: absolute;
+				top: 10%;
+				width: 8%;
+				height: 80%;
+				border: 1px solid #363E42;
+				border-radius: 1em;
+			}
+			.list{
+				position: absolute;
+				top: 5%;
+				width: 100%;
+				height: 95%;
+			}
+			.list .listHead{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 10%;
+				background: rgba(255, 255, 255, 0.57);
+			}
+			.list .listHead .search{
+				position: absolute;
+				top: 5%;
+				width: 100%;
+				height: 20%;
+				font-family: PingFangSC-Regular;
+				font-size: 0.3em;
+				line-height: 2em;
+				color: #151515;
+				letter-spacing: -0.45px;
+			}
+			.list .listHead .search input{
+				position: absolute;
+				top: 0;
+				width: 60%;
+				margin-right: 5%;
+				margin-left: 1em;
+				padding-left: 2em;
+				border: 1px solid #D8D8D8;
+				background: #ffffff;
+				border-radius: 1em;
+			}
+			.list .listHead .search button{
+				position: relative;
+				right: 10%;
+				width: 8%;
+				float: right;
+				border-radius: 1em;
+				border: 1px solid #363E42;
+				background: #FCC400;
+			}
+			.list .listHead .ordering{
+				position: absolute;
+				top: 60%;
+				width: 100%;
+				height: 40%;
+				font-family: PingFangSC-Regular;
+				font-size: 0.3em;
+				line-height: 2em;
+				color: #ffffff;
+				letter-spacing: -0.45px;
+				background: #160edc;
+			}
+			.list .listHead .ordering label{
+				margin-right: 2em;
+			}
+			.list .button button{
+				width: 15em;
+				background: #ffffff;
+				border: 1px solid #363E42;
+				border-radius: 13px;
+			}
+			.list .listTable{
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 90%;
+			}
+			.list .listTable .table{
+				height: 90%;
+				width: 100%;
+				overflow: auto;
+			}
+			.list .listTable .table table{
+				height: 100%;
+				width: 100%;
+				table-layout: fixed;
+				empty-cells:hide;
+			}
+			.list .listTable .table  th{
+				position: sticky;
+				top:0;
+				font-family: PingFangSC-Regular;
+				font-size: 0.5em;
+				color: #ffffff;
+				text-align: center;
+				letter-spacing: -0.45px;
+				background: #191A1E;
+				height: 10%;
+			}
+			.list .listTable .table  td{
+				font-family: PingFangSC-Regular;
+				font-size: 0.4em;
+				color: #191A1E;
+				letter-spacing: -0.45px;
+				text-align: center;
+				background: #ffffff;
+				border:1px solid #999;
+				height: 5%;
+				white-space: nowrap;
+			}
+			.list .listTable .page{
+				position: absolute;
+				right: 5%;
+				bottom: 0;
+				height: 10%;
+				font-size: 0.3em;
+				line-height: 2em;
+				background-color: rgba(255, 255, 255, 0.57);
+			}
+			.list .listTable .page button{
+				position: relative;
+				width: 20em;
+				font-size: 0.3em;
+				line-height: 4em;
+				border: 1px solid #363E42;
+				border-radius: 1em;
+			}
+			.detail{
+				position: absolute;
+				top: 5%;
+				width: 100%;
+				height: 95%;
+			}
+			.detail .listHead{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 10%;
+				background: rgba(255, 255, 255, 0.57);
+			}
+			.detail .listHead .search{
+				position: absolute;
+				top: 5%;
+				width: 100%;
+				height: 20%;
+				font-family: PingFangSC-Regular;
+				font-size: 0.3em;
+				line-height: 2em;
+				color: #151515;
+				letter-spacing: -0.45px;
+			}
+			.detail .listHead .search input{
+				position: absolute;
+				top: 0;
+				width: 60%;
+				margin-right: 5%;
+				margin-left: 1em;
+				padding-left: 2em;
+				border: 1px solid #D8D8D8;
+				background: #ffffff;
+				border-radius: 1em;
+			}
+			.detail .listHead .search button{
+				position: relative;
+				right: 10%;
+				width: 8%;
+				float: right;
+				border-radius: 1em;
+				border: 1px solid #363E42;
+				background: #FCC400;
+			}
+			.detail .listHead .ordering{
+				position: absolute;
+				top: 60%;
+				width: 100%;
+				height: 40%;
+				font-family: PingFangSC-Regular;
+				font-size: 0.3em;
+				line-height: 2em;
+				color: #ffffff;
+				letter-spacing: -0.45px;
+				background: #160edc;
+			}
+			.detail .listHead .ordering label{
+				margin-right: 2em;
+			}
+			.detail .button button{
+				width: 15em;
+				background: #ffffff;
+				border: 1px solid #363E42;
+				border-radius: 13px;
+			}
+			.detail .listTable{
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 90%;
+			}
+			.detail .listTable .table{
+				height: 90%;
+				width: 100%;
+				overflow: auto;
+			}
+			.detail .listTable .table table{
+				height: 100%;
+				width: 100%;
+				table-layout: fixed;
+				empty-cells:hide;
+			}
+			.detail .listTable .table  th{
+				position: sticky;
+				top:0;
+				font-family: PingFangSC-Regular;
+				font-size: 0.5em;
+				color: #ffffff;
+				text-align: center;
+				letter-spacing: -0.45px;
+				background: #191A1E;
+				height: 10%;
+			}
+			.detail .listTable .table  td{
+				font-family: PingFangSC-Regular;
+				font-size: 0.4em;
+				color: #191A1E;
+				letter-spacing: -0.45px;
+				text-align: center;
+				background: #ffffff;
+				border:1px solid #999;
+				height: 5%;
+				white-space: nowrap;
+			}
+			.detail .listTable .page{
+				position: absolute;
+				right: 5%;
+				bottom: 0;
+				height: 10%;
+				font-size: 0.3em;
+				line-height: 2em;
+				background-color: rgba(255, 255, 255, 0.57);
+			}
+			.detail .listTable .page button{
+				position: relative;
+				width: 20em;
+				font-size: 0.3em;
+				line-height: 4em;
+				border: 1px solid #363E42;
+				border-radius: 1em;
+			}
+		</style>
+	</body>
+</html>

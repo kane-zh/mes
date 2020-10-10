@@ -1,0 +1,325 @@
+webpackJsonp([53],{
+
+/***/ "8taX":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+// EXTERNAL MODULE: ./node_modules/_vuelidate@0.7.5@vuelidate/lib/validators/index.js
+var validators = __webpack_require__("DhQT");
+var validators_default = /*#__PURE__*/__webpack_require__.n(validators);
+
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./src/views/home/content/user/UserConfig.vue
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var UserConfig = ({
+  name: 'userConfig',
+  data: function data() {
+    return {
+      /* 视图显示控制 */
+      showViewIndex: 'list',
+      /* 详情页数据 */
+      detail: [],
+      details: {
+        'groups': [],
+        'user_permissions': []
+      },
+      /* 创建表单项数据 */
+      formItem: {
+        'id': '',
+        'password': '',
+        'first_name': '',
+        'last_name': '',
+        'email': '',
+        'job_number': '',
+        'post': '',
+        'wechat': '',
+        'mobile': '',
+        'image': null,
+        'desc': ''
+      },
+      password: {
+        firstinput: '',
+        secondinput: ''
+      },
+      /* 具有审核权限的账号信息 */
+      userinfor: [],
+      image: ''
+    };
+  },
+
+  validations: {
+    formItem: {
+      code: {
+        required: validators["required"],
+        minLength: Object(validators["minLength"])(2),
+        maxLength: Object(validators["maxLength"])(32)
+      },
+      auditor: {
+        required: validators["required"]
+      }
+    }
+  },
+  methods: {
+    /* 显示详情视图 */
+    showDetailView: function showDetailView() {
+      this.Detail = []; // 清空详情数据
+      var self = this;
+      var index = this.$store.getters.getLoginInfor.id;
+      this.$axios.get('user/userInfor/' + index).then(function (response) {
+        self.detail = response.data;
+        self.showViewIndex = 'detail';
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+
+    /* 显示更新视图 */
+    showUpdateView: function showUpdateView() {
+      /* 清空更新数据 */
+      for (var key in this.formItem) {
+        this.formItem[key] = '';
+      }
+      this.image = '';
+      var self = this;
+      var index = this.$store.getters.getLoginInfor.id;
+      this.$axios.get('user/userInfor/' + index).then(function (response) {
+        self.formItem.id = response.data.id;
+        self.formItem.password = '';
+        self.formItem.first_name = response.data.first_name;
+        self.formItem.last_name = response.data.last_name;
+        self.formItem.email = response.data.email;
+        self.formItem.job_number = response.data.job_number;
+        self.formItem.post = response.data.post;
+        self.formItem.wechat = response.data.wechat;
+        self.formItem.mobile = response.data.mobile;
+        self.formItem.image = response.data.image;
+        self.formItem.desc = response.data.desc;
+        self.showViewIndex = 'update';
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    showChangePasswordView: function showChangePasswordView() {
+      this.password.firstinput = '';
+      this.password.secondinput = '';
+      this.showViewIndex = 'change';
+    },
+    imageBeforeUpload: function imageBeforeUpload(event) {
+      this.image = event.target.files[0];
+    },
+
+    /* 更新表单数据 */
+    update: function update() {
+      var formData = new FormData();
+      // 下面是表单绑定的data 数据
+      formData.append('first_name', this.formItem.first_name);
+      formData.append('last_name', this.formItem.last_name);
+      formData.append('email', this.formItem.email);
+      formData.append('job_number', this.formItem.job_number);
+      formData.append('post', this.formItem.post);
+      formData.append('wechat', this.formItem.wechat);
+      formData.append('mobile', this.formItem.mobile);
+      if (this.image !== '') {
+        formData.append('image', this.image);
+      }
+      formData.append('desc', this.formItem.desc);
+      var self = this;
+      this.$axios.put('user/userInfor/' + self.formItem.id + '/', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+        self.formItem.image = response.data.image;
+        alert('数据提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 改变密码函数 */
+    changePassword: function changePassword() {
+      var self = this;
+      if (this.password.firstinput === '') {
+        alert('请输入新密码');
+        return;
+      }
+      if (this.password.firstinput !== this.password.secondinput) {
+        alert('两次密码不一致');
+        this.password.firstinput = '';
+        this.password.secondinput = '';
+        return;
+      }
+      this.$axios.patch('user/userInfor/' + self.detail.id + '/', {
+        password: self.password.firstinput
+      }).then(function (response) {
+        alert('修改密码成功');
+        self.showViewIndex = 'detail';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.showDetailView(4);
+  },
+
+  watch: {
+    detail: function detail() {
+      var self = this;
+      self.details.groups = self.detail.groups;
+      self.details.user_permissions = self.detail.user_permissions;
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler?{"id":"data-v-405cf051","hasScoped":true,"transformToRequire":{"video":["src","poster"],"source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./src/views/home/content/user/UserConfig.vue
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"userConfig"},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewIndex==='detail'),expression:"showViewIndex==='detail'"}],staticClass:"detail"},[_c('div',{staticClass:"content"},[_c('ul',[_c('li',[_vm._v(_vm._s("账号名:"+"　"+_vm.detail.username))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("名字:"+"　"+_vm.detail.first_name))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("姓氏:"+"　"+_vm.detail.last_name))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("超级用户:"+"　"+_vm.detail.is_superuser))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("邮箱地址:"+"　"+_vm.detail.email))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("工号:"+"　"+_vm.detail.job_number))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("职位:"+"　"+_vm.detail.post))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("微信:"+"　"+_vm.detail.wechat))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("手机:"+"　"+_vm.detail.mobile))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("备注:"+"　"+_vm.detail.desc))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("授权账号:"+"　"+_vm.detail.auditor))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("创建时间:"+"　"+_vm.detail.create_time))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("上次更新时间:"+"　"+_vm.detail.update_time))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("最近登录时间:"+"　"+_vm.detail.last_login))])]),_vm._v(" "),_c('dl',[_c('dt',[_vm._v("照片:")]),_vm._v(" "),_c('dd',{key:0},[_c('img',{attrs:{"src":_vm.detail.image,"width":"100"}})])]),_vm._v(" "),_c('dl',[_c('dt',[_vm._v("用户组:")]),_vm._v(" "),_vm._l((_vm.details.groups),function(value,index){return _c('dd',{key:index},[_vm._v("\n          "+_vm._s(value.name)+"\n        ")])})],2),_vm._v(" "),_c('dl',[_c('dt',[_vm._v("用户权限:")]),_vm._v(" "),_vm._l((_vm.details.user_permissions),function(value,index){return _c('dd',{key:index},[_vm._v("\n          "+_vm._s(value.name)+"\n        ")])})],2)]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.showUpdateView}},[_vm._v("信息更改")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.showChangePasswordView}},[_vm._v("密码更改")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewIndex==='update'),expression:"showViewIndex==='update'"}],staticClass:"update"},[_c('form',[_c('div',[_vm._v("名字:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.first_name),expression:"formItem.first_name"}],attrs:{"placeholder":"请输账号的用户名字..."},domProps:{"value":(_vm.formItem.first_name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "first_name", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("姓氏:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.last_name),expression:"formItem.last_name"}],attrs:{"placeholder":"请输入账号的用户姓氏..."},domProps:{"value":(_vm.formItem.last_name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "last_name", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("电话:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.mobile),expression:"formItem.mobile"}],attrs:{"placeholder":"请输入账号用户电话..."},domProps:{"value":(_vm.formItem.mobile)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "mobile", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("微信:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.wechat),expression:"formItem.wechat"}],attrs:{"placeholder":"请输入账号的用户微信..."},domProps:{"value":(_vm.formItem.wechat)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "wechat", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("邮箱:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.email),expression:"formItem.email"}],attrs:{"placeholder":"请输入账号的用户邮箱..."},domProps:{"value":(_vm.formItem.email)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "email", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("工号:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.job_number),expression:"formItem.job_number"}],attrs:{"placeholder":"请输入账号的用户工号..."},domProps:{"value":(_vm.formItem.job_number)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "job_number", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("职位:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.post),expression:"formItem.post"}],attrs:{"placeholder":"请输入账号的用户职位..."},domProps:{"value":(_vm.formItem.post)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "post", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("说明:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.desc),expression:"formItem.desc"}],attrs:{"placeholder":"请输入用户的其他说明信息..."},domProps:{"value":(_vm.formItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "desc", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("照片:\n          "),_c('input',{attrs:{"type":"file"},on:{"change":_vm.imageBeforeUpload}})]),_vm._v(" "),_c('div',[_c('img',{attrs:{"src":_vm.formItem.image,"width":"150px"}})])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.update}},[_vm._v("提交数据")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.showDetailView}},[_vm._v("返回列表页")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewIndex==='change'),expression:"showViewIndex==='change'"}],staticClass:"change"},[_c('form',[_c('div',[_vm._v("请输入新密码:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.password.firstinput),expression:"password.firstinput"}],attrs:{"type":"password","placeholder":"请输入新密码..."},domProps:{"value":(_vm.password.firstinput)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.password, "firstinput", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("请确认新密码:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.password.secondinput),expression:"password.secondinput"}],attrs:{"type":"password","placeholder":"请确认新密码..."},domProps:{"value":(_vm.password.secondinput)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.password, "secondinput", $event.target.value)}}})]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.changePassword}},[_vm._v("更改密码")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.showDetailView}},[_vm._v("返回列表页")])])])])])}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ var user_UserConfig = (esExports);
+// CONCATENATED MODULE: ./src/views/home/content/user/UserConfig.vue
+function injectStyle (ssrContext) {
+  __webpack_require__("NwVd")
+}
+var normalizeComponent = __webpack_require__("C7Lr")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-405cf051"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  UserConfig,
+  user_UserConfig,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ var content_user_UserConfig = __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "NwVd":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ })
+
+});

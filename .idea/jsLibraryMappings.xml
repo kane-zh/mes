@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata1/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata10/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata11/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata12/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata13/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata14/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata15/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata2/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata3/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata4/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata5/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata6/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata7/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata8/node_modules" />
+    <excludedPredefinedLibrary name="mes/mes_board/demo/bigdata9/node_modules" />
+  </component>
+</project>

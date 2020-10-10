@@ -1,0 +1,1252 @@
+webpackJsonp([26],{
+
+/***/ "xnG2":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+// EXTERNAL MODULE: ./node_modules/_vuelidate@0.7.5@vuelidate/lib/validators/index.js
+var validators = __webpack_require__("DhQT");
+var validators_default = /*#__PURE__*/__webpack_require__.n(validators);
+
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./src/views/home/content/warehouse/SemifinishedWaringRule.vue
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var SemifinishedWaringRule = ({
+  name: 'semifinishedWaringRule',
+  components: {},
+  data: function data() {
+    return {
+      /* 视图显示控制 */
+      showViewid: 'list',
+      showChildForm: '',
+      /* 列表页数据 */
+      list: [],
+      listCount: 0,
+      listPreUrl: '',
+      listNextUrl: '',
+      /* 子项列表数据 */
+      list_child: [],
+      /* 列表页查询参数 */
+      selectItem: {
+        state: '',
+        create_user: '',
+        auditor: '',
+        searchValue: ''
+      },
+      /* 列表页数据排序 */
+      ordering: '-id',
+      /* 详情页数据 */
+      detail: [],
+      /* 详情页审核记录项表单 */
+      alterItem: {
+        desc: '',
+        uri: 'semifinishedWaringRule'
+      },
+      alterList: [],
+      alterData: [],
+      /* 详情页按钮显示控制 */
+      showSubmitBt: false,
+      showReturnBt: false,
+      showApprovedBt: false,
+      showDeleteBt: false,
+      /* 创建页表单项数据 */
+      formItem: {
+        id: '',
+        name: '',
+        code: '',
+        state: '',
+        child: [],
+        file: [],
+        alter: [],
+        desc: '',
+        auditor: ''
+      },
+      formItem_child: {
+        id: '',
+        warehouse: '',
+        semifinishedType: null,
+        semifinished: '',
+        batch: '',
+        minimum: '',
+        maximum: '',
+        lowthreshold: '',
+        highthreshold: '',
+        desc: ''
+      },
+      /* 创建页文件项表单 */
+      fileItem: {
+        file: null,
+        fileName: '',
+        desc: '',
+        uri: 'semifinishedWaringRule'
+      },
+      fileData: [],
+      /* 具有审核权限的账号信息 */
+      userinfor: [],
+      /* 半成品类型信息 */
+      semifinishedType: [],
+      /* 半成品信息 */
+      semifinishedInfor: [],
+      /* 仓库信息 */
+      warehouseInfor: [],
+      /* 附加属性标题 */
+      attribute_title: {
+        attribute1: '',
+        attribute2: '',
+        attribute3: '',
+        attribute4: '',
+        attribute5: ''
+      }
+    };
+  },
+
+  validations: {
+    formItem: {
+      code: {
+        required: validators["required"],
+        minLength: Object(validators["minLength"])(2),
+        maxLength: Object(validators["maxLength"])(32)
+      },
+      auditor: {
+        required: validators["required"]
+      }
+    }
+  },
+  methods: {
+    /* 显示列表视图 */
+    showListView: function showListView() {
+      this.list = []; // 清空列表数据
+      this.listCount = 0;
+      this.listPreUrl = '';
+      this.listNextUrl = '';
+      for (var key in this.selectItem) {
+        this.selectItem[key] = '';
+      }
+      var self = this;
+      this.$axios.get('warehouse/semifinishedWaringRule/?ordering=' + self.ordering).then(function (response) {
+        self.list = response.data.results;
+        self.listCount = response.data.count;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+        self.showViewid = 'list';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    /* 列表查询数据 */
+    select: function select() {
+      this.list = []; // 清空列表数据
+      this.listCount = 0;
+      this.listPreUrl = '';
+      this.listNextUrl = '';
+      var self = this;
+      this.$axios.get('warehouse/semifinishedWaringRule/?state=' + self.selectItem.state + '&auditor=' + self.selectItem.auditor + '&create_user=' + self.selectItem.create_user + '&search=' + self.selectItem.searchValue + '&ordering=' + self.ordering).then(function (response) {
+        self.list = response.data.results;
+        self.listCount = response.data.count;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    listPre: function listPre() {
+      this.list = []; // 清空列表数据
+      var self = this;
+      this.$axios.get(this.listPreUrl).then(function (response) {
+        self.listPreUrl = '';
+        self.listNextUrl = '';
+        self.list = response.data.results;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    listNext: function listNext() {
+      this.list = []; // 清空列表数据
+      var self = this;
+      this.$axios.get(this.listNextUrl).then(function (response) {
+        self.listPreUrl = '';
+        self.listNextUrl = '';
+        self.list = response.data.results;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示详情视图 */
+    showDetailView: function showDetailView(id) {
+      this.detail = []; // 清空详情数据
+      this.alterData = []; // 清空审核数据
+      this.list_child = [];
+      var self = this;
+      this.$axios.get('warehouse/semifinishedWaringRule/' + id).then(function (response) {
+        self.detail = response.data;
+        response.data.child.forEach(function (value, i) {
+          var obj1 = { 'id': value.id,
+            'warehouseCode': value.warehouse_code,
+            'warehouseName': value.warehouse_name,
+            'semifinishedTypeCode': value.semifinishedType_code,
+            'semifinishedTypeName': value.semifinishedType_name,
+            'semifinishedCode': value.semifinished_code,
+            'semifinishedName': value.semifinished_name,
+            'batch': value.batch,
+            'minimum': value.minimum,
+            'maximum': value.maximum,
+            'lowthreshold': value.lowthreshold,
+            'highthreshold': value.highthreshold,
+            'desc': value.desc };
+          self.formItem.child.push(value.id);
+          self.list_child.push(obj1);
+        });
+        self.showViewid = 'detail';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 改变数据项状态 */
+    changeState: function changeState(state) {
+      var self = this;
+      if (!confirm('确认提交??')) {
+        return;
+      }
+      this.formItem.state = state;
+      this.$axios.patch('warehouse/semifinishedWaringRule/' + self.detail.id + '/', {
+        state: self.formItem.state,
+        alter: self.formItem.alter
+      }).then(function (response) {
+        self.detail.state = self.formItem.state;
+        self.formItem.state = '';
+        self.formItem.alter = [];
+        if (self.detail.state === '作废') {
+          self.showListView();
+        }
+        alert('数据提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示创建视图 */
+    showCreatView: function showCreatView() {
+      /* 清空表单数据 */
+      for (var key in this.formItem) {
+        if (Object.prototype.toString.call(this.formItem[key]) === '[object Array]') {
+          this.formItem[key] = [];
+        } else if (Object.prototype.toString.call(this.formItem[key]) === '[object Object]') {
+          var obj = this.formItem[key];
+          for (var key1 in obj) {
+            if (Object.prototype.toString.call(obj[key1]) === '[object Array]') {
+              obj[key1] = [];
+            } else {
+              obj[key1] = '';
+            }
+          }
+        } else {
+          this.formItem[key] = '';
+        }
+      }
+      /* 清空子项表单数据 */
+      for (var _key in this.formItem_child) {
+        if (Object.prototype.toString.call(this.formItem_child[_key]) === '[object Array]') {
+          this.formItem_child[_key] = [];
+        } else if (Object.prototype.toString.call(this.formItem_child[_key]) === '[object Object]') {
+          var obj2 = this.formItem_child[_key];
+          for (var _key2 in obj2) {
+            if (Object.prototype.toString.call(obj2[_key2]) === '[object Array]') {
+              obj2[_key2] = [];
+            } else {
+              obj2[_key2] = '';
+            }
+          }
+        } else {
+          this.formItem_child[_key] = '';
+        }
+      }
+      this.list_child = [];
+      this.fileData = [];
+      this.showViewid = 'create';
+    },
+
+    /* 显示更新视图 */
+    showUpdateView: function showUpdateView(id) {
+      /* 清空表单数据 */
+      for (var key in this.formItem) {
+        if (Object.prototype.toString.call(this.formItem[key]) === '[object Array]') {
+          this.formItem[key] = [];
+        } else if (Object.prototype.toString.call(this.formItem[key]) === '[object Object]') {
+          var obj = this.formItem[key];
+          for (var key1 in obj) {
+            if (Object.prototype.toString.call(obj[key1]) === '[object Array]') {
+              obj[key1] = [];
+            } else {
+              obj[key1] = '';
+            }
+          }
+        } else {
+          this.formItem[key] = '';
+        }
+      }
+      /* 清空子项表单数据 */
+      for (var _key3 in this.formItem_child) {
+        if (Object.prototype.toString.call(this.formItem_child[_key3]) === '[object Array]') {
+          this.formItem_child[_key3] = [];
+        } else if (Object.prototype.toString.call(this.formItem_child[_key3]) === '[object Object]') {
+          var obj2 = this.formItem_child[_key3];
+          for (var _key4 in obj2) {
+            if (Object.prototype.toString.call(obj2[_key4]) === '[object Array]') {
+              obj2[_key4] = [];
+            } else {
+              obj2[_key4] = '';
+            }
+          }
+        } else {
+          this.formItem_child[_key3] = '';
+        }
+      }
+      this.list_child = [];
+      this.alterList = [];
+      this.fileData = [];
+      var self = this;
+      this.$axios.get('warehouse/semifinishedWaringRule/' + id).then(function (response) {
+        self.formItem.id = response.data.id;
+        self.formItem.name = response.data.name;
+        self.formItem.state = response.data.state;
+        self.formItem.code = response.data.code;
+        self.formItem.desc = response.data.desc;
+        self.formItem.auditor = response.data.auditor;
+        self.alterList = response.data.alter;
+        response.data.child.forEach(function (value, i) {
+          var obj1 = { 'id': value.id,
+            'warehouseCode': value.warehouse_code,
+            'warehouseName': value.warehouse_name,
+            'semifinishedTypeCode': value.semifinishedType_code,
+            'semifinishedTypeName': value.semifinishedType_name,
+            'semifinishedCode': value.semifinished_code,
+            'semifinishedName': value.semifinished_name,
+            'batch': value.batch,
+            'minimum': value.minimum,
+            'maximum': value.maximum,
+            'lowthreshold': value.lowthreshold,
+            'highthreshold': value.highthreshold,
+            'desc': value.desc };
+          self.formItem.child.push(value.id);
+          self.list_child.push(obj1);
+        });
+        response.data.file.forEach(function (value, i) {
+          var obj = { 'id': value.id, 'fileName': value.file_name, 'fileUrl': value.file, 'desc': value.desc, 'uri': value.uri };
+          self.formItem.file.push(value.id);
+          self.fileData.push(obj);
+        });
+        self.showViewid = 'update';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 提交文件项 */
+    uploadFile: function uploadFile() {
+      if (!confirm('确认提交??')) {
+        return;
+      }
+      var formData = new FormData();
+      // 下面是表单绑定的data 数据
+      formData.append('uri', this.fileItem.uri);
+      formData.append('desc', this.fileItem.desc);
+      formData.append('file', this.fileItem.file);
+      var self = this;
+      this.$axios.post('warehouse/file/', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+        var obj = { 'id': response.data.id,
+          'fileName': self.fileItem.fileName,
+          'fileUrl': response.data.file,
+          'desc': response.data.desc,
+          'uri': response.data.uri };
+        self.fileItem.file = null;
+        self.fileItem.desc = '';
+        self.formItem.file.push(response.data.id);
+        self.fileData.push(obj);
+        alert(self.fileItem.fileName + '文件提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    fileBeforeUpload: function fileBeforeUpload(event) {
+      this.fileItem.file = event.target.files[0];
+      this.fileItem.fileName = event.target.files[0].name;
+    },
+
+    removeFile: function removeFile(id) {
+      var self = this;
+      if (!confirm('是否要删除当前数据')) {
+        // 当用户点击的取消按钮的时候，应该阻断这个方法中的后面代码的继续执行
+        return;
+      }
+      for (var i = 0; i < self.formItem.file.length; i++) {
+        if (self.formItem.file[i] === id) {
+          self.formItem.file.splice(i, 1);
+        }
+      }
+      for (var j = 0; j < self.fileData.length; j++) {
+        if (self.fileData[j].id === id) {
+          self.fileData.splice(j, 1);
+        }
+      }
+    },
+    /* 提交审核记录项 */
+    uploadAlter: function uploadAlter() {
+      var self = this;
+      if (!confirm('确认提交??')) {
+        return;
+      }
+      this.$axios.post('warehouse/alterRecord/', {
+        desc: self.alterItem.desc,
+        uri: self.alterItem.uri
+      }).then(function (response) {
+        var obj = { 'id': response.data.id,
+          'desc': response.data.desc,
+          'uri': response.data.uri };
+        self.alterItem.desc = '';
+        self.formItem.alter.push(response.data.id);
+        self.alterData.push(obj);
+        alert('审核记录提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 提交子项物料项 */
+    uploadChild: function uploadChild() {
+      var self = this;
+      this.$axios.post('warehouse/semifinishedWaringRuleItem/', {
+        warehouse_code: self.formItem_child.warehouse,
+        semifinished_id: self.formItem_child.semifinished,
+        batch: self.formItem_child.batch,
+        minimum: self.formItem_child.minimum,
+        maximum: self.formItem_child.maximum,
+        lowthreshold: self.formItem_child.lowthreshold,
+        highthreshold: self.formItem_child.highthreshold,
+        desc: self.formItem_child.desc
+      }).then(function (response) {
+        self.showChildForm = '';
+        var index = 0;
+        for (var i = 0; i < self.semifinishedInfor.length; i++) {
+          if (self.semifinishedInfor[i].id === parseInt(response.data.semifinished_id)) {
+            index = i;
+            break;
+          }
+        }
+        var index1 = 0;
+        for (var j = 0; j < self.semifinishedType.length; j++) {
+          if (self.semifinishedType[j].id === self.formItem_child.semifinishedType) {
+            index1 = j;
+            break;
+          }
+        }
+        var index2 = 0;
+        for (var k = 0; k < self.warehouseInfor.length; k++) {
+          if (self.semifinishedType[k].code === self.formItem_child.warehouse) {
+            index2 = k;
+            break;
+          }
+        }
+        var obj = {
+          'warehouseCode': self.warehouseInfor[index2].code,
+          'warehouseName': self.warehouseInfor[index2].name,
+          'semifinishedTypCode': self.semifinishedType[index1].code,
+          'semifinishedTypeName': self.semifinishedType[index1].name,
+          'semifinishedCode': self.semifinishedInfor[index].code,
+          'semifinishedName': self.semifinishedInfor[index].name,
+          'batch': response.data.batch,
+          'minimum': response.data.minimum,
+          'maximum': response.data.maximum,
+          'lowthreshold': response.data.lowthreshold,
+          'highthreshold': response.data.highthreshold,
+          'desc': response.data.desc
+        };
+        self.list_child.push(obj);
+        self.formItem.child.push(response.data.id);
+        self.formItem_child.warehouse = '';
+        self.formItem_child.semifinishedType = '';
+        self.formItem_child.semifinished = '';
+        self.formItem_child.batch = '';
+        self.formItem_child.minimum = '';
+        self.formItem_child.maximum = '';
+        self.formItem_child.lowthreshold = '';
+        self.formItem_child.highthreshold = '';
+        self.formItem_child.desc = '';
+        alert('记录提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    removeChild: function removeChild(id) {
+      var self = this;
+      if (!confirm('是否要删除当前数据' + id)) {
+        // 当用户点击的取消按钮的时候，应该阻断这个方法中的后面代码的继续执行
+        return;
+      }
+      for (var i = 0; i < self.formItem.child.length; i++) {
+        if (self.formItem.child[i] === id) {
+          self.formItem.child.splice(i, 1);
+        }
+      }
+      for (var j = 0; j < self.list_child.length; j++) {
+        if (self.list_child[j].id === id) {
+          self.list_child.splice(j, 1);
+        }
+      }
+    },
+    /* 保存表单数据 */
+    save: function save() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.post('warehouse/semifinishedWaringRule/', {
+        name: self.formItem.name,
+        code: self.formItem.code,
+        child: self.formItem.child,
+        file: self.formItem.file,
+        desc: self.formItem.desc,
+        auditor: self.formItem.auditor
+      }).then(function (response) {
+        self.formItem.file = [];
+        self.fileData = [];
+        alert('数据保存成功');
+      }).catch(function (error) {
+        if (error.request) {
+          alert(error.request.response);
+        } else {
+          console.log('Error', error.message);
+        }
+      });
+    },
+
+    /* 更新表单数据 */
+    update: function update() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.put('warehouse/semifinishedWaringRule/' + self.formItem.id + '/', {
+        name: self.formItem.name,
+        code: self.formItem.code,
+        child: self.formItem.child,
+        file: self.formItem.file,
+        desc: self.formItem.desc,
+        auditor: self.formItem.auditor
+      }).then(function (response) {
+        alert('数据保存成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 保存并提交表单数据 */
+    saveAndSubmit: function saveAndSubmit() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.post('warehouse/semifinishedWaringRule/', {
+        name: self.formItem.name,
+        code: self.formItem.code,
+        child: self.formItem.child,
+        file: self.formItem.file,
+        desc: self.formItem.desc,
+        auditor: self.formItem.auditor
+      }).then(function (response) {
+        self.formItem.file = [];
+        self.fileData = [];
+        self.$axios.patch('warehouse/semifinishedWaringRule/' + response.data.id + '/', {
+          state: '审核中'
+        }).then(function (response) {
+          alert('数据提交成功');
+        }).catch(function (err) {
+          if (err.request) {
+            alert(err.request.response);
+          } else {
+            console.log('Error', err.message);
+          }
+        });
+      }).catch(function (error) {
+        if (error.request) {
+          alert(error.request.response);
+        } else {
+          console.log('Error', error.message);
+        }
+      });
+    },
+
+    /* 更新并提交表单数据 */
+    updateAndSubmit: function updateAndSubmit() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.put('warehouse/semifinishedWaringRule/' + self.formItem.id + '/', {
+        name: self.formItem.name,
+        code: self.formItem.code,
+        child: self.formItem.child,
+        file: self.formItem.file,
+        desc: self.formItem.desc,
+        auditor: self.formItem.auditor
+      }).then(function (response) {
+        self.formItem.file = [];
+        self.fileData = [];
+        self.$axios.patch('warehouse/semifinishedWaringRule/' + response.data.id + '/', {
+          state: '审核中'
+        }).then(function (response) {
+          alert('数据提交成功');
+          self.showViewid = 'list';
+        }).catch(function (err) {
+          if (err.request) {
+            alert(err.request.response);
+          } else {
+            console.log('Error', err.message);
+          }
+        });
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.userinfor = [];
+    var self = this;
+    this.$axios.get('user/userInfor/?page_size=99999&ordering=-id').then(function (response) {
+      self.userinfor = response.data.results;
+      self.$axios.get('process/semifinishedType/?page_size=99999&ordering=-id&state=使用中').then(function (response) {
+        self.semifinishedType = response.data.results;
+        self.$axios.get('warehouse/warehouse/?page_size=99999&ordering=-id&state=使用中').then(function (response) {
+          self.warehouseInfor = response.data.results;
+          self.showListView();
+        }).catch(function (err) {
+          if (err.request) {
+            alert(err.request.response);
+          } else {
+            console.log('Error', err.message);
+          }
+        });
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }).catch(function (err) {
+      if (err.request) {
+        alert(err.request.response);
+      } else {
+        console.log('Error', err.message);
+      }
+    });
+  },
+
+  computed: {
+    username: function username() {
+      return this.$store.getters.getLoginInfor.name;
+    },
+    is_superuser: function is_superuser() {
+      return this.$store.getters.getLoginInfor.is_superuser;
+    },
+    permissions: function permissions() {
+      return this.$store.getters.getLoginInfor.permissions;
+    },
+    canCreate: function canCreate() {
+      return 'warehouse.add_semifinishedwaringrulemodel' in this.permissions;
+    },
+    canRead: function canRead() {
+      return 'warehouse.read_semifinishedwaringrulemodel' in this.permissions;
+    }
+  },
+  watch: {
+    formItem: {
+      deep: true
+    },
+    /* 监控状态信息变化,控制操作按钮的显示 */
+    'detail.state': function detailState(newval, oldval) {
+      var self = this;
+      self.showSubmitBt = false;
+      self.showDeleteBt = false;
+      self.showReturnBt = false;
+      self.showApprovedBt = false;
+      if (self.detail.state === '审核中' && (self.detail.auditor === self.username || self.is_superuser === true)) {
+        self.showApprovedBt = true;
+        self.showReturnBt = true;
+      }
+      if (self.detail.state === '新建' && (self.detail.create_user === self.username || self.is_superuser === true)) {
+        self.showSubmitBt = true;
+        self.showDeleteBt = true;
+      }
+    },
+    formItem_child: {
+      deep: true
+    },
+    /* 监控用户选择的类别变化时,更新附加属性标题 */
+    'formItem_child.semifinishedType': function formItem_childSemifinishedType(newval, oldval) {
+      var self = this;
+      this.semifinishedInfor = [];
+      if (newval === undefined) {
+        return;
+      }
+      this.$axios.get('process/semifinishedType/' + newval).then(function (response) {
+        self.semifinishedInfor = response.data.semifinishedType_item;
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler?{"id":"data-v-74373954","hasScoped":true,"transformToRequire":{"video":["src","poster"],"source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./src/views/home/content/warehouse/SemifinishedWaringRule.vue
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"semifinishedWaringRule"},[(_vm.showViewid==='list')?_c('div',{staticClass:"list"},[_c('div',{staticClass:"listHead"},[_c('form',{staticClass:"select"},[_c('div',[_vm._v("创建账号:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.create_user),expression:"selectItem.create_user"}],attrs:{"placeholder":"请选择创建账号"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "create_user", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.userinfor),function(item){return _c('option',{key:item.username,domProps:{"value":item.username}},[_vm._v(_vm._s(item.username))])}),0)]),_vm._v(" "),_c('div',[_vm._v("审核账号:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.auditor),expression:"selectItem.auditor"}],attrs:{"placeholder":"请选择审核账号"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "auditor", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.userinfor),function(item){return _c('option',{key:item.username,domProps:{"value":item.username}},[_vm._v(_vm._s(item.username))])}),0)]),_vm._v(" "),_c('div',[_vm._v("状态:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.state),expression:"selectItem.state"}],attrs:{"placeholder":"请选择状态"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "state", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},[_c('option',{attrs:{"value":"新建"}},[_vm._v("新建")]),_vm._v(" "),_c('option',{attrs:{"value":"审核中"}},[_vm._v("审核中")]),_vm._v(" "),_c('option',{attrs:{"value":"使用中"}},[_vm._v("使用中")])])]),_vm._v(" "),_c('div',[_vm._v("关键字:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.searchValue),expression:"selectItem.searchValue"}],attrs:{"type":"text","placeholder":"  请输入要搜索的信息..."},domProps:{"value":(_vm.selectItem.searchValue)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.selectItem, "searchValue", $event.target.value)}}})]),_vm._v(" "),_c('div',[_c('button',{attrs:{"type":"button"},on:{"click":_vm.select}},[_vm._v("搜索")])]),_vm._v(" "),_c('div',[_c('button',{staticStyle:{"background":"#FCC400","border":"none","left":"0"},attrs:{"type":"button"},on:{"click":_vm.showListView}},[_vm._v("重置")])])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.canCreate===true),expression:"canCreate===true"}],attrs:{"type":"button"},on:{"click":_vm.showCreatView}},[_vm._v("添加半成品库存预警")])]),_vm._v(" "),_c('div',{staticClass:"ordering"},[_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"id","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"id")},on:{"change":function($event){_vm.ordering="id"}}}),_vm._v("\n          添加时间-正排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"-id","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"-id")},on:{"change":function($event){_vm.ordering="-id"}}}),_vm._v("\n          添加时间-倒排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"update_time","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"update_time")},on:{"change":function($event){_vm.ordering="update_time"}}}),_vm._v("\n          更新时间-正排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"-update_time","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"-update_time")},on:{"change":function($event){_vm.ordering="-update_time"}}}),_vm._v("\n          更新时间-倒排序\n        ")])])]),_vm._v(" "),_c('div',{staticClass:"listTable"},[_c('div',{staticClass:"table"},[_c('table',[_vm._m(0),_vm._v(" "),_vm._l((_vm.list),function(item,index){return _c('tr',{key:item.id,attrs:{"align":"center","type":"height:1em"}},[_c('td',[_vm._v(_vm._s(index))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.code))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.state))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.create_user))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.auditor))]),_vm._v(" "),_c('td',[(item.create_user===_vm.username ||
+                item.auditor===_vm.username||_vm.canRead===true)?_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showDetailView(item.id)}}},[_vm._v("详情")]):_vm._e(),_vm._v(" "),(item.state==='新建')?_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showUpdateView(item.id)}}},[_vm._v("更改")]):_vm._e()])])}),_vm._v(" "),_c('tr')],2)]),_c('div',{staticClass:"page"},[_c('div',[_vm._v("总共："+_vm._s(_vm.listCount))]),_vm._v(" "),(_vm.listPreUrl!=='')?_c('button',{attrs:{"type":"button"},on:{"click":_vm.listPre}},[_vm._v("上一页")]):_vm._e(),_vm._v(" "),(_vm.listNextUrl!=='')?_c('button',{attrs:{"type":"button"},on:{"click":_vm.listNext}},[_vm._v("下一页")]):_vm._e()])])]):_vm._e(),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='detail'),expression:"showViewid==='detail'"}],staticClass:"detail"},[_c('div',{staticClass:"content"},[_c('ul',[_c('li',[_vm._v(_vm._s("半成品库存预警名称:"+"　"+_vm.detail.name))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("半成品库存预警编码:"+"　"+_vm.detail.code))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("状态:"+"　"+_vm.detail.state))]),_vm._v(" "),(_vm.attribute_title.attribute1!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute1 +":"+"　"+_vm.detail.attribute1))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute2!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute2 +":"+"　"+_vm.detail.attribute2))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute3!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute3 +":"+"　"+_vm.detail.attribute3))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute4!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute4 +":"+"　"+_vm.detail.attribute4))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute5!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute5 +":"+"　"+_vm.detail.attribute5))]):_vm._e(),_vm._v(" "),_c('li',[_vm._v(_vm._s("创建账号:"+"　"+_vm.detail.create_user))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("审核账号:"+"　"+_vm.detail.auditor))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("创建时间:"+"　"+_vm.detail.create_time))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("更新时间:"+"　"+_vm.detail.update_time))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("备注信息:"+"　"+_vm.detail.desc))])]),_vm._v(" "),(_vm.list_child!==undefined && _vm.list_child.length > 0)?_c('Collapse',{attrs:{"active-key":"3","accordion":""}},[_vm._v("\n        预警子项:\n        "),_c('Panel',[_c('div',{attrs:{"slot":"content"},slot:"content"},[_c('table',[_c('tr',{attrs:{"align":"center","type":"height:2em"}},[_c('th',[_vm._v("序号")]),_vm._v(" "),_c('th',[_vm._v("名称")]),_vm._v(" "),_c('th',[_vm._v("编码")]),_vm._v(" "),_c('th',[_vm._v("状态")])]),_vm._v(" "),_vm._l((_vm.list_child),function(item,index){return _c('tr',{key:item.id,attrs:{"align":"center","type":"height:1em"}},[_c('td',[_vm._v(_vm._s(index))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.code))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.state))])])}),_vm._v(" "),_c('tr')],2)])])],1):_vm._e(),_vm._v(" "),_c('dl',[_c('dt',[_vm._v("半成品库存预警文件:")]),_vm._v(" "),_vm._l((_vm.detail.file),function(value,id){return [_c('a',{key:id,attrs:{"target":"_black","href":value.file}},[_vm._v(_vm._s(value.file_name))])]})],2),_vm._v(" "),_c('dl',[_c('dt',[_vm._v("历史审核记录:")]),_vm._v(" "),_vm._l((_vm.detail.alter),function(value,id){return [_c('dd',{key:id},[_vm._v("\n            "+_vm._s("　　　"+value.desc+"　" +value.create_user+"　"+value.create_time)+"\n          ")])]})],2),_vm._v(" "),_c('dl',[_c('dt',[_vm._v("新添加记录:")]),_vm._v(" "),_vm._l((_vm.alterData),function(value,id){return [_c('dd',{key:id},[_vm._v("\n            "+_vm._s("　　　"+value.desc)+"\n          ")])]})],2)],1),_vm._v(" "),(_vm.detail.state!=='使用中')?_c('div',{staticClass:"alter"},[_vm._v("\n      审核信息:\n      "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.alterItem.desc),expression:"alterItem.desc"}],attrs:{"placeholder":"请输入当前信息的审核记录..."},domProps:{"value":(_vm.alterItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.alterItem, "desc", $event.target.value)}}}),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.uploadAlter}},[_vm._v("提交记录")])]):_vm._e(),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.showSubmitBt===true),expression:"showSubmitBt===true"}],attrs:{"type":"button"},on:{"click":function($event){return _vm.changeState('审核中')}}},[_vm._v("提交数据")]),_vm._v(" "),_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.showApprovedBt===true),expression:"showApprovedBt===true"}],attrs:{"type":"button"},on:{"click":function($event){return _vm.changeState('使用中')}}},[_vm._v("通过审核")]),_vm._v(" "),_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.showReturnBt===true),expression:"showReturnBt===true"}],attrs:{"type":"button"},on:{"click":function($event){return _vm.changeState('新建')}}},[_vm._v("驳回信息")]),_vm._v(" "),_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.showDeleteBt===true),expression:"showDeleteBt===true"}],attrs:{"type":"button"},on:{"click":function($event){return _vm.changeState('作废')}}},[_vm._v("删除数据")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='create'),expression:"showViewid==='create'"}],staticClass:"create"},[_c('form',[_c('div',[_vm._v("半成品预警规则名称:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.name),expression:"formItem.name"}],attrs:{"placeholder":"请输入半成品预警规则名称..."},domProps:{"value":(_vm.formItem.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "name", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("半成品预警规则编码:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.code),expression:"formItem.code"}],attrs:{"placeholder":"请输入半成品预警规则编码..."},domProps:{"value":(_vm.formItem.code)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "code", $event.target.value)}}}),_vm._v(" "),(!_vm.$v.formItem.code.required)?_c('span',{staticClass:"message"},[_vm._v("编码不能为空")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.minLength)?_c('span',{staticClass:"message"},[_vm._v("最少长度为2")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.maxLength)?_c('span',{staticClass:"message"},[_vm._v("最大长度位32")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("审核账号:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.auditor),expression:"formItem.auditor"}],attrs:{"placeholder":"请选择审核账号"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "auditor", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.userinfor),function(item){return _c('option',{key:item.username,domProps:{"value":item.username}},[_vm._v(_vm._s(item.username))])}),0),_vm._v(" "),(!_vm.$v.formItem.auditor.required)?_c('span',{staticClass:"message"},[_vm._v("请选择审核账号")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("备注信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.desc),expression:"formItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息..."},domProps:{"value":(_vm.formItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "desc", $event.target.value)}}})]),_vm._v(" "),_c('div',{staticClass:"annex"},[_vm._v("文件附件:\n        "),_c('ul',_vm._l((_vm.fileData),function(value){return _c('li',{key:value.id,on:{"click":function($event){return _vm.removeFile(value.id)}}},[_vm._v(_vm._s(value.fileName))])}),0),_vm._v(" "),_c('input',{attrs:{"type":"file"},on:{"change":_vm.fileBeforeUpload}}),_vm._v(" "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.fileItem.desc),expression:"fileItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息..."},domProps:{"value":(_vm.fileItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.fileItem, "desc", $event.target.value)}}}),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.uploadFile}},[_vm._v("上传")])]),_vm._v(" "),_c('div'),_vm._v(" "),_c('div'),_vm._v(" "),_c('div',[_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showChildForm='true'}}},[_vm._v("添加子项")])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showChildForm==='true'),expression:"showChildForm==='true'"}],staticClass:"child"},[_c('form',[_c('div',[_vm._v("仓库:\n            "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.warehouse),expression:"formItem_child.warehouse"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem_child, "warehouse", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.warehouseInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.code}},[_vm._v(_vm._s(item.name +"("+ item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("半成品类型:\n            "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.semifinishedType),expression:"formItem_child.semifinishedType"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem_child, "semifinishedType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.semifinishedType),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name +"("+ item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("半成品信息:\n            "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.semifinished),expression:"formItem_child.semifinished"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem_child, "semifinished", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.semifinishedInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name + item.code))])}),0)]),_vm._v(" "),_c('div',[_vm._v("批次:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.batch),expression:"formItem.batch"}],attrs:{"placeholder":"请输入物料批次..."},domProps:{"value":(_vm.formItem.batch)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "batch", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("最大数量:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.maximum),expression:"formItem_child.maximum"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.maximum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "maximum", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("最少数量:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.minimum),expression:"formItem_child.minimum"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.minimum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "minimum", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("高阀值:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.highthreshold),expression:"formItem_child.highthreshold"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.highthreshold)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "highthreshold", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("低阀值:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.lowthreshold),expression:"formItem_child.lowthreshold"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.lowthreshold)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "lowthreshold", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("备注信息:\n            "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.desc),expression:"formItem_child.desc"}],attrs:{"placeholder":"请输入当前物料说明信息..."},domProps:{"value":(_vm.formItem_child.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "desc", $event.target.value)}}})]),_vm._v(" "),_c('div',[_c('button',{attrs:{"type":"button"},on:{"click":_vm.uploadChild}},[_vm._v("添加")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showChildForm='false'}}},[_vm._v("取消")])])])]),_vm._v(" "),_c('table',{directives:[{name:"show",rawName:"v-show",value:(_vm.list_child.length>0),expression:"list_child.length>0"}]},[_c('caption',{attrs:{"align":"top"}},[_vm._v("已添加子项:")]),_vm._v(" "),_vm._m(1),_vm._v(" "),_vm._l((_vm.list_child),function(item,index){return _c('tr',{key:item.id,attrs:{"align":"center","type":"height:1em"}},[_c('td',[_vm._v(_vm._s(index))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.warehouseName))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.warehouseCode))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedTypeName))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedTypCode))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedName))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedCode))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.batch))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.maximum))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.minimum))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.highthreshold))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.lowthreshold))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.desc))]),_vm._v(" "),_c('td',[_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.removeChild(item.id)}}},[_vm._v("移除")])])])}),_vm._v(" "),_c('tr')],2)]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.save}},[_vm._v("保存数据")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.saveAndSubmit}},[_vm._v("保存并提交")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='update'),expression:"showViewid==='update'"}],staticClass:"update"},[_c('form',[_c('div',[_vm._v("半成品预警规则名称:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.name),expression:"formItem.name"}],attrs:{"placeholder":"请输入半成品预警规则名称..."},domProps:{"value":(_vm.formItem.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "name", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("半成品预警规则编码:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.code),expression:"formItem.code"}],attrs:{"placeholder":"请输入半成品预警规则编码..."},domProps:{"value":(_vm.formItem.code)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "code", $event.target.value)}}}),_vm._v(" "),(!_vm.$v.formItem.code.required)?_c('span',{staticClass:"message"},[_vm._v("编码不能为空")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.minLength)?_c('span',{staticClass:"message"},[_vm._v("最少长度为2")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.maxLength)?_c('span',{staticClass:"message"},[_vm._v("最大长度位32")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("审核账号:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.auditor),expression:"formItem.auditor"}],attrs:{"placeholder":"请选择审核账号"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "auditor", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.userinfor),function(item){return _c('option',{key:item.username,domProps:{"value":item.username}},[_vm._v(_vm._s(item.username))])}),0),_vm._v(" "),(!_vm.$v.formItem.auditor.required)?_c('span',{staticClass:"message"},[_vm._v("请选择审核账号")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("备注信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.desc),expression:"formItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息..."},domProps:{"value":(_vm.formItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "desc", $event.target.value)}}})]),_vm._v(" "),_c('div',{staticClass:"annex"},[_vm._v("文件附件:\n        "),_c('ul',_vm._l((_vm.fileData),function(value){return _c('li',{key:value.id,on:{"click":function($event){return _vm.removeFile(value.id)}}},[_vm._v(_vm._s(value.fileName))])}),0),_vm._v(" "),_c('input',{attrs:{"type":"file"},on:{"change":_vm.fileBeforeUpload}}),_vm._v(" "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.fileItem.desc),expression:"fileItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息..."},domProps:{"value":(_vm.fileItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.fileItem, "desc", $event.target.value)}}}),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.uploadFile}},[_vm._v("上传")])]),_vm._v(" "),_c('div'),_vm._v(" "),_c('div'),_vm._v(" "),_c('div',[_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showChildForm='true'}}},[_vm._v("添加子项")])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showChildForm==='true'),expression:"showChildForm==='true'"}],staticClass:"child"},[_c('form',[_c('div',[_vm._v("仓库:\n            "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.warehouse),expression:"formItem_child.warehouse"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem_child, "warehouse", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.warehouseInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.code}},[_vm._v(_vm._s(item.name +"("+ item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("半成品类型:\n            "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.semifinishedType),expression:"formItem_child.semifinishedType"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem_child, "semifinishedType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.semifinishedType),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name +"("+ item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("半成品信息:\n            "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.semifinished),expression:"formItem_child.semifinished"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem_child, "semifinished", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.semifinishedInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name + item.code))])}),0)]),_vm._v(" "),_c('div',[_vm._v("批次:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.batch),expression:"formItem.batch"}],attrs:{"placeholder":"请输入物料批次..."},domProps:{"value":(_vm.formItem.batch)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "batch", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("最大数量:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.maximum),expression:"formItem_child.maximum"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.maximum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "maximum", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("最少数量:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.minimum),expression:"formItem_child.minimum"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.minimum)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "minimum", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("高阀值:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.highthreshold),expression:"formItem_child.highthreshold"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.highthreshold)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "highthreshold", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("低阀值:\n            "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.lowthreshold),expression:"formItem_child.lowthreshold"}],attrs:{"type":"number"},domProps:{"value":(_vm.formItem_child.lowthreshold)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "lowthreshold", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("备注信息:\n            "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem_child.desc),expression:"formItem_child.desc"}],attrs:{"placeholder":"请输入当前物料说明信息..."},domProps:{"value":(_vm.formItem_child.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem_child, "desc", $event.target.value)}}})]),_vm._v(" "),_c('div',[_c('button',{attrs:{"type":"button"},on:{"click":_vm.uploadChild}},[_vm._v("添加")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showChildForm='false'}}},[_vm._v("取消")])])])]),_vm._v(" "),_c('table',{directives:[{name:"show",rawName:"v-show",value:(_vm.list_child.length>0),expression:"list_child.length>0"}]},[_c('caption',{attrs:{"align":"top"}},[_vm._v("已添加子项:")]),_vm._v(" "),_vm._m(2),_vm._v(" "),_vm._l((_vm.list_child),function(item,index){return _c('tr',{key:item.id,attrs:{"align":"center","type":"height:1em"}},[_c('td',[_vm._v(_vm._s(index))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.warehouseName))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.warehouseCode))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedTypeName))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedTypCode))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedName))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedCode))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.batch))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.maximum))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.minimum))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.highthreshold))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.lowthreshold))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.desc))]),_vm._v(" "),_c('td',[_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.removeChild(item.id)}}},[_vm._v("移除")])])])}),_vm._v(" "),_c('tr')],2),_vm._v(" "),_c('div',[_vm._v("历史审核记录:\n        "),_c('ul',_vm._l((_vm.alterList),function(value){return _c('li',{key:value.id},[_vm._v("\n            "+_vm._s(value.desc+value.create_time+value.create_user)+"\n          ")])}),0)])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.update}},[_vm._v("保存数据")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.updateAndSubmit}},[_vm._v("保存并提交")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])])])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('tr',{attrs:{"align":"center","type":"height:2em"}},[_c('th',[_vm._v("序号")]),_vm._v(" "),_c('th',[_vm._v("名称")]),_vm._v(" "),_c('th',[_vm._v("编码")]),_vm._v(" "),_c('th',[_vm._v("状态")]),_vm._v(" "),_c('th',[_vm._v("创建账号")]),_vm._v(" "),_c('th',[_vm._v("审核账号")]),_vm._v(" "),_c('th',[_vm._v("操作")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('tr',{attrs:{"align":"center","type":"height:2em"}},[_c('th',[_vm._v("序号")]),_vm._v(" "),_c('th',[_vm._v("仓库名称")]),_vm._v(" "),_c('th',[_vm._v("仓库编码")]),_vm._v(" "),_c('th',[_vm._v("半成品类型名称")]),_vm._v(" "),_c('th',[_vm._v("半成品类型编码")]),_vm._v(" "),_c('th',[_vm._v("半成品名称")]),_vm._v(" "),_c('th',[_vm._v("半成品编码")]),_vm._v(" "),_c('th',[_vm._v("批次")]),_vm._v(" "),_c('th',[_vm._v("最大量")]),_vm._v(" "),_c('th',[_vm._v("最少量")]),_vm._v(" "),_c('th',[_vm._v("高阀值")]),_vm._v(" "),_c('th',[_vm._v("低阀值")]),_vm._v(" "),_c('th',[_vm._v("说明")]),_vm._v(" "),_c('th',[_vm._v("操作")])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('tr',{attrs:{"align":"center","type":"height:2em"}},[_c('th',[_vm._v("序号")]),_vm._v(" "),_c('th',[_vm._v("仓库名称")]),_vm._v(" "),_c('th',[_vm._v("仓库编码")]),_vm._v(" "),_c('th',[_vm._v("半成品类型名称")]),_vm._v(" "),_c('th',[_vm._v("半成品类型编码")]),_vm._v(" "),_c('th',[_vm._v("半成品名称")]),_vm._v(" "),_c('th',[_vm._v("半成品编码")]),_vm._v(" "),_c('th',[_vm._v("批次")]),_vm._v(" "),_c('th',[_vm._v("最大量")]),_vm._v(" "),_c('th',[_vm._v("最少量")]),_vm._v(" "),_c('th',[_vm._v("高阀值")]),_vm._v(" "),_c('th',[_vm._v("低阀值")]),_vm._v(" "),_c('th',[_vm._v("说明")]),_vm._v(" "),_c('th',[_vm._v("操作")])])}]
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ var warehouse_SemifinishedWaringRule = (esExports);
+// CONCATENATED MODULE: ./src/views/home/content/warehouse/SemifinishedWaringRule.vue
+function injectStyle (ssrContext) {
+  __webpack_require__("zHLj")
+}
+var normalizeComponent = __webpack_require__("C7Lr")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-74373954"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  SemifinishedWaringRule,
+  warehouse_SemifinishedWaringRule,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ var content_warehouse_SemifinishedWaringRule = __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "zHLj":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ })
+
+});

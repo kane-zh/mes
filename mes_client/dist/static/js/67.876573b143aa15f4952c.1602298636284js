@@ -1,0 +1,592 @@
+webpackJsonp([67],{
+
+/***/ "Ztfg":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "uo2I":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+// EXTERNAL MODULE: ./node_modules/_vuelidate@0.7.5@vuelidate/lib/validators/index.js
+var validators = __webpack_require__("DhQT");
+var validators_default = /*#__PURE__*/__webpack_require__.n(validators);
+
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./src/views/home/content/equipment/EquipmentState.vue
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var EquipmentState = ({
+  name: 'equipmentState',
+  components: {},
+  data: function data() {
+    return {
+      /* 视图显示控制 */
+      showViewid: 'list',
+      /* 列表页数据 */
+      list: [],
+      listCount: 0,
+      listPreUrl: '',
+      listNextUrl: '',
+      /* 列表页查询参数 */
+      selectItem: {
+        create_user: '',
+        searchValue: ''
+      }, /* 列表页数据排序 */
+      ordering: '-id',
+      /* 详情页数据 */
+      detail: [],
+      /* 创建页表单项数据 */
+      formItem: {
+        id: '',
+        name: '',
+        code: '',
+        equipmentType: null,
+        equipment: null,
+        desc: ''
+      },
+      /* 设备类型信息 */
+      equipmentType: [],
+      /* 设备信息 */
+      equipmentInfor: [],
+      /* 附加属性标题 */
+      attribute_title: {
+        attribute1: '属性1',
+        attribute2: '属性2',
+        attribute3: '属性3',
+        attribute4: '属性4',
+        attribute5: '属性5',
+        attribute6: '属性6',
+        attribute7: '属性7',
+        attribute8: '属性8',
+        attribute9: '属性9',
+        attribute10: '属性10'
+      }
+    };
+  },
+
+  validations: {
+    formItem: {
+      code: {
+        required: validators["required"],
+        minLength: Object(validators["minLength"])(2),
+        maxLength: Object(validators["maxLength"])(32)
+      },
+      auditor: {
+        required: validators["required"]
+      },
+      equipment: {
+        required: validators["required"]
+      }
+    }
+  },
+  methods: {
+    /* 显示列表视图 */
+    showListView: function showListView() {
+      this.list = []; // 清空列表数据
+      this.listCount = 0;
+      this.listPreUrl = '';
+      this.listNextUrl = '';
+      for (var key in this.selectItem) {
+        this.selectItem[key] = '';
+      }
+      var self = this;
+      this.$axios.get('equipment/equipmentState/?ordering=' + self.ordering).then(function (response) {
+        self.list = response.data.results;
+        self.listCount = response.data.count;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+        self.showViewid = 'list';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    /* 列表查询数据 */
+    select: function select() {
+      this.list = []; // 清空列表数据
+      this.listCount = 0;
+      this.listPreUrl = '';
+      this.listNextUrl = '';
+      var self = this;
+      this.$axios.get('equipment/equipmentState/?create_user=' + self.selectItem.create_user + '&search=' + self.selectItem.searchValue + '&ordering=' + self.ordering).then(function (response) {
+        self.list = response.data.results;
+        self.listCount = response.data.count;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    listPre: function listPre() {
+      this.list = []; // 清空列表数据
+      var self = this;
+      this.$axios.get(this.listPreUrl).then(function (response) {
+        self.listPreUrl = '';
+        self.listNextUrl = '';
+        self.list = response.data.results;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    listNext: function listNext() {
+      this.list = []; // 清空列表数据
+      var self = this;
+      this.$axios.get(this.listNextUrl).then(function (response) {
+        self.listPreUrl = '';
+        self.listNextUrl = '';
+        self.list = response.data.results;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示详情视图 */
+    showDetailView: function showDetailView(id) {
+      this.detail = []; // 清空详情数据
+      var self = this;
+      this.$axios.get('equipment/equipmentState/' + id).then(function (response) {
+        self.detail = response.data;
+        self.showViewid = 'detail';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示创建视图 */
+    showCreatView: function showCreatView() {
+      /* 清空表单数据 */
+      for (var key in this.formItem) {
+        if (Object.prototype.toString.call(this.formItem[key]) === '[object Array]') {
+          this.formItem[key] = [];
+        } else if (Object.prototype.toString.call(this.formItem[key]) === '[object Object]') {
+          var obj = this.formItem[key];
+          for (var key1 in obj) {
+            if (Object.prototype.toString.call(obj[key1]) === '[object Array]') {
+              obj[key1] = [];
+            } else {
+              obj[key1] = '';
+            }
+          }
+        } else {
+          this.formItem[key] = '';
+        }
+      }
+      this.showViewid = 'create';
+    },
+
+    /* 显示更新视图 */
+    showUpdateView: function showUpdateView(id) {
+      /* 清空表单数据 */
+      for (var key in this.formItem) {
+        if (Object.prototype.toString.call(this.formItem[key]) === '[object Array]') {
+          this.formItem[key] = [];
+        } else if (Object.prototype.toString.call(this.formItem[key]) === '[object Object]') {
+          var obj = this.formItem[key];
+          for (var key1 in obj) {
+            if (Object.prototype.toString.call(obj[key1]) === '[object Array]') {
+              obj[key1] = [];
+            } else {
+              obj[key1] = '';
+            }
+          }
+        } else {
+          this.formItem[key] = '';
+        }
+      }
+      var self = this;
+      this.$axios.get('equipment/equipmentState/' + id).then(function (response) {
+        self.formItem.id = response.data.id;
+        self.formItem.name = response.data.name;
+        self.formItem.code = response.data.code;
+        self.formItem.desc = response.data.desc;
+        if (response.data.equipment !== null) {
+          self.formItem.equipment = response.data.equipment.id;
+          self.formItem.equipmentType = response.data.equipment.type.id;
+        } else {
+          self.formItem.equipment = response.data.equipment;
+        }
+        self.showViewid = 'update';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 保存表单数据 */
+    save: function save() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.post('equipment/equipmentState/', {
+        name: self.formItem.name,
+        code: self.formItem.code,
+        equipment: self.formItem.equipment,
+        desc: self.formItem.desc
+      }).then(function (response) {
+        alert('数据保存成功');
+      }).catch(function (error) {
+        if (error.request) {
+          alert(error.request.response);
+        } else {
+          console.log('Error', error.message);
+        }
+      });
+    },
+
+    /* 更新表单数据 */
+    update: function update() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.put('equipment/equipmentState/' + self.formItem.id + '/', {
+        name: self.formItem.name,
+        code: self.formItem.code,
+        equipment: self.formItem.equipment,
+        desc: self.formItem.desc
+      }).then(function (response) {
+        alert('数据保存成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.equipmentType = [];
+    this.equipmentInfor = [];
+    var self = this;
+    this.$axios.get('equipment/equipmentType/?page_size=99999&ordering=-id&state=使用中').then(function (response) {
+      self.equipmentType = response.data.results;
+      self.showListView();
+    }).catch(function (err) {
+      if (err.request) {
+        alert(err.request.response);
+      } else {
+        console.log('Error', err.message);
+      }
+    });
+  },
+
+  computed: {
+    username: function username() {
+      return this.$store.getters.getLoginInfor.name;
+    },
+    is_superuser: function is_superuser() {
+      return this.$store.getters.getLoginInfor.is_superuser;
+    },
+    permissions: function permissions() {
+      return this.$store.getters.getLoginInfor.permissions;
+    },
+    canCreate: function canCreate() {
+      return 'equipment.add_equipmentstatemodel' in this.permissions;
+    },
+    canRead: function canRead() {
+      return 'equipment.read_equipmentstatemodel' in this.permissions;
+    }
+  },
+  watch: {
+    formItem: {
+      deep: true
+    },
+    /* 监控用户选择的设备类型变化时,更新设备信息 */
+    'formItem.equipmentType': function formItemEquipmentType(newval, oldval) {
+      var self = this;
+      this.equipmentInfor = [];
+      if (newval === undefined) {
+        return;
+      }
+      this.$axios.get('equipment/equipmentType/' + newval).then(function (response) {
+        self.equipmentInfor = response.data.equipmentType_item;
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler?{"id":"data-v-0f233afc","hasScoped":true,"transformToRequire":{"video":["src","poster"],"source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./src/views/home/content/equipment/EquipmentState.vue
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"equipmentState"},[(_vm.showViewid==='list')?_c('div',{staticClass:"list"},[_c('div',{staticClass:"listHead"},[_c('form',{staticClass:"select"},[_c('div',[_vm._v("创建账号:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.create_user),expression:"selectItem.create_user"}],attrs:{"placeholder":"请选择创建账号"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "create_user", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.userinfor),function(item){return _c('option',{key:item.username,domProps:{"value":item.username}},[_vm._v(_vm._s(item.username))])}),0)]),_vm._v(" "),_c('div',[_vm._v("关键字:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.searchValue),expression:"selectItem.searchValue"}],attrs:{"type":"text","placeholder":"  请输入要搜索的信息..."},domProps:{"value":(_vm.selectItem.searchValue)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.selectItem, "searchValue", $event.target.value)}}})]),_vm._v(" "),_c('div',[_c('button',{attrs:{"type":"button"},on:{"click":_vm.select}},[_vm._v("搜索")])]),_vm._v(" "),_c('div',[_c('button',{staticStyle:{"background":"#FCC400","border":"none","left":"0"},attrs:{"type":"button"},on:{"click":_vm.showListView}},[_vm._v("重置")])])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.canCreate===true),expression:"canCreate===true"}],attrs:{"type":"button"},on:{"click":_vm.showCreatView}},[_vm._v("添加设备状态信息")])]),_vm._v(" "),_c('div',{staticClass:"ordering"},[_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"id","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"id")},on:{"change":function($event){_vm.ordering="id"}}}),_vm._v("\n          添加时间-正排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"-id","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"-id")},on:{"change":function($event){_vm.ordering="-id"}}}),_vm._v("\n          添加时间-倒排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"update_time","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"update_time")},on:{"change":function($event){_vm.ordering="update_time"}}}),_vm._v("\n          更新时间-正排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"-update_time","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"-update_time")},on:{"change":function($event){_vm.ordering="-update_time"}}}),_vm._v("\n          更新时间-倒排序\n        ")])])]),_vm._v(" "),_c('div',{staticClass:"listTable"},[_c('div',{staticClass:"table"},[_c('table',[_vm._m(0),_vm._v(" "),_vm._l((_vm.list),function(item,index){return _c('tr',{key:item.id,attrs:{"align":"center","type":"height:1em"}},[_c('td',[_vm._v(_vm._s(index))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.code))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.equipment.name))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.equipment.code))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.type))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.allTime))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.runTime))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.sum))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.task))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.update_time))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.create_user))]),_vm._v(" "),_c('td',[(item.create_user===_vm.username ||
+                item.auditor===_vm.username||_vm.canRead===true)?_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showDetailView(item.id)}}},[_vm._v("详情")]):_vm._e(),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showUpdateView(item.id)}}},[_vm._v("更改")])])])}),_vm._v(" "),_c('tr')],2)]),_c('div',{staticClass:"page"},[_c('div',[_vm._v("总共："+_vm._s(_vm.listCount))]),_vm._v(" "),(_vm.listPreUrl!=='')?_c('button',{attrs:{"type":"button"},on:{"click":_vm.listPre}},[_vm._v("上一页")]):_vm._e(),_vm._v(" "),(_vm.listNextUrl!=='')?_c('button',{attrs:{"type":"button"},on:{"click":_vm.listNext}},[_vm._v("下一页")]):_vm._e()])])]):_vm._e(),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='detail'),expression:"showViewid==='detail'"}],staticClass:"detail"},[_c('div',{staticClass:"content"},[_c('ul',[_c('li',[_vm._v(_vm._s("设备状态名称:"+"　"+_vm.detail.name))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("设备状态编码:"+"　"+_vm.detail.code))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("设备状态:"+"　"+_vm.detail.type))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("运行时长:"+"　"+_vm.detail.runTime))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("开机时长:"+"　"+_vm.detail.allTime))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("加工数量:"+"　"+_vm.detail.sum))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("任务编码:"+"　"+_vm.detail.task))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("稼动率:"+"　"+_vm.detail.util_rate))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("完成率:"+"　"+_vm.detail.comp_rate))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("操作者:"+"　"+_vm.detail.handler))]),_vm._v(" "),(_vm.attribute_title.attribute1!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute1 +":"+"　"+_vm.detail.attribute1))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute2!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute2 +":"+"　"+_vm.detail.attribute2))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute3!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute3 +":"+"　"+_vm.detail.attribute3))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute4!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute4 +":"+"　"+_vm.detail.attribute4))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute5!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute5 +":"+"　"+_vm.detail.attribute5))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute6!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute1 +":"+"　"+_vm.detail.attribute1))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute7!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute2 +":"+"　"+_vm.detail.attribute2))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute8!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute3 +":"+"　"+_vm.detail.attribute3))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute9!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute4 +":"+"　"+_vm.detail.attribute4))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute10!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute5 +":"+"　"+_vm.detail.attribute5))]):_vm._e(),_vm._v(" "),_c('li',[_vm._v(_vm._s("创建账号:"+"　"+_vm.detail.create_user))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("创建时间:"+"　"+_vm.detail.create_time))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("更新时间:"+"　"+_vm.detail.update_time))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("备注信息:"+"　"+_vm.detail.desc))])])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='create'),expression:"showViewid==='create'"}],staticClass:"create"},[_c('form',[_c('div',[_vm._v("名称:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.name),expression:"formItem.name"}],attrs:{"placeholder":"请输入名称..."},domProps:{"value":(_vm.formItem.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "name", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("编码:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.code),expression:"formItem.code"}],attrs:{"placeholder":"请输入编码..."},domProps:{"value":(_vm.formItem.code)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "code", $event.target.value)}}}),_vm._v(" "),(!_vm.$v.formItem.code.required)?_c('span',{staticClass:"message"},[_vm._v("编码不能为空")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.minLength)?_c('span',{staticClass:"message"},[_vm._v("最少长度为2")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.maxLength)?_c('span',{staticClass:"message"},[_vm._v("最大长度位32")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("设备类型:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.equipmentType),expression:"formItem.equipmentType"}],attrs:{"placeholder":"请选择设备类型"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "equipmentType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.equipmentType),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("设备:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.equipment),expression:"formItem.equipment"}],attrs:{"placeholder":"请选择设备"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "equipment", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.equipmentInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0),_vm._v(" "),(!_vm.$v.formItem.equipment.required)?_c('span',{staticClass:"message"},[_vm._v("请选择设备")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("备注信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.desc),expression:"formItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息..."},domProps:{"value":(_vm.formItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "desc", $event.target.value)}}})])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.save}},[_vm._v("保存数据")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='update'),expression:"showViewid==='update'"}],staticClass:"update"},[_c('form',[_c('div',[_vm._v("名称:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.name),expression:"formItem.name"}],attrs:{"placeholder":"请输入名称..."},domProps:{"value":(_vm.formItem.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "name", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("编码:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.code),expression:"formItem.code"}],attrs:{"placeholder":"请输入编码..."},domProps:{"value":(_vm.formItem.code)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "code", $event.target.value)}}}),_vm._v(" "),(!_vm.$v.formItem.code.required)?_c('span',{staticClass:"message"},[_vm._v("编码不能为空")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.minLength)?_c('span',{staticClass:"message"},[_vm._v("最少长度为2")]):_vm._e(),_vm._v(" "),(!_vm.$v.formItem.code.maxLength)?_c('span',{staticClass:"message"},[_vm._v("最大长度位32")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("设备类型:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.equipmentType),expression:"formItem.equipmentType"}],attrs:{"placeholder":"请选择设备类型"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "equipmentType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.equipmentType),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("设备:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.equipment),expression:"formItem.equipment"}],attrs:{"placeholder":"请选择设备"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "equipment", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.equipmentInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0),_vm._v(" "),(!_vm.$v.formItem.equipment.required)?_c('span',{staticClass:"message"},[_vm._v("请选择设备")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("备注信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.desc),expression:"formItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息..."},domProps:{"value":(_vm.formItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "desc", $event.target.value)}}})])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.update}},[_vm._v("保存数据")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])])])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('tr',{attrs:{"align":"center","type":"height:2em"}},[_c('th',[_vm._v("序号")]),_vm._v(" "),_c('th',[_vm._v("名称")]),_vm._v(" "),_c('th',[_vm._v("编码")]),_vm._v(" "),_c('th',[_vm._v("设备名称")]),_vm._v(" "),_c('th',[_vm._v("设备编码")]),_vm._v(" "),_c('th',[_vm._v("状态")]),_vm._v(" "),_c('th',[_vm._v("开机时长")]),_vm._v(" "),_c('th',[_vm._v("运行时长")]),_vm._v(" "),_c('th',[_vm._v("加工数量")]),_vm._v(" "),_c('th',[_vm._v("任务号")]),_vm._v(" "),_c('th',[_vm._v("更新时间")]),_vm._v(" "),_c('th',[_vm._v("创建账号")]),_vm._v(" "),_c('th',[_vm._v("操作")])])}]
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ var equipment_EquipmentState = (esExports);
+// CONCATENATED MODULE: ./src/views/home/content/equipment/EquipmentState.vue
+function injectStyle (ssrContext) {
+  __webpack_require__("Ztfg")
+}
+var normalizeComponent = __webpack_require__("C7Lr")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-0f233afc"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  EquipmentState,
+  equipment_EquipmentState,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ var content_equipment_EquipmentState = __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ })
+
+});

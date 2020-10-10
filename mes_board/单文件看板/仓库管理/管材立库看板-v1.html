@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>管材立库看板-v1</title>
+		<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+		<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+		<script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js"></script>
+		<script>
+			document.oncontextmenu=new Function("return false")
+			document.onselectstart=new Function("return false")
+		</script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="top">
+				<img src="http://pic.yupoo.com/kane-zhang/1fa60e5b/83a00ed8.png" />
+				<span>管材立库看板-v1 Production task board</span>
+			</div>
+			<div class="login" v-if="isLogin===false">
+				<input v-model="formItem.username" >
+				<input v-model="formItem.password" type="password">
+				<submit  @click="login">登录</submit>
+			</div>
+			<div class="main" v-if="isLogin===true">
+			<div class="main_t">
+				<div class="mian_t_lt">
+					<label><img src="http://pic.yupoo.com/kane-zhang/36540828/a5e9b04a.png">仓库数据统计</label>
+					<img src="http://pic.yupoo.com/kane-zhang/ac59acec/da5b3bce.jpg" style="margin-left: 20%;margin-top: 10%">
+				</div>
+				<div class="mian_t_rt">
+					<label><img src="http://pic.yupoo.com/kane-zhang/3cc81786/6c60f321.png">仓位占用表</label>
+					<ul>
+						<template v-for="item in positionInfor">
+						  <li style="background: #FFE15B" v-if="item.state==='使用中'">{{item.code}}</li>
+						  <li style="background: #44484a" v-if="item.state==='闲置'">{{item.code}}</li>
+						</template>
+					</ul>
+			</div>
+			</div>
+			<div class="main_b">
+					<label><img src="http://pic.yupoo.com/kane-zhang/bca2a5e6/bd1eafa0.png">库存明细</label>
+					<div class="table" id="parent" >
+						<table id="child">
+							<thead>
+							<tr align="center">
+								<th>仓库名称</th>
+								<th>仓库编码</th>
+								<th>仓位名称</th>
+								<th>仓位编码</th>
+								<th>类型名称</th>
+								<th>类型编码</th>
+								<th>物料名称</th>
+								<th>物料编码</th>
+								<th>批次</th>
+								<th>数量</th>
+								<th>时间</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr align="center" v-for="item in stockDetail" :key="item.id" v-if="item.state==='使用中'">
+								<td>{{item.warehouse_name}}</td>
+								<td>{{item.warehouse_code}}</td>
+								<td>{{item.position_name}}</td>
+								<td>{{item.position_code}}</td>
+								<td>{{item.materialType_name}}</td>
+								<td>{{item.materialType_code}}</td>
+								<td>{{item.material_name}}</td>
+								<td>{{item.material_code}}</td>
+								<td>{{item.batch}}</td>
+								<td>{{item.sum}}</td>
+								<td>{{item.update_time}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	    <script type="text/javascript">
+			var app = new Vue({
+			el: "#app",
+			data: {
+				isLogin:false,
+				/* 创建页表单项数据 */
+				formItem: {
+					username: '张久奎',
+					password: '123433',
+				},
+				stockDetail: [],
+				positionInfor:[],
+				parent:'',
+				child:''
+			},
+			methods: {
+				login() {
+					var self = this
+					axios.post('login', {
+						username: self.formItem.username,
+						password: self.formItem.password
+					}).then(function (response) {
+						axios.defaults.headers.common['Authorization'] = 'JWT ' + response.data.token
+						self.getStockDetail()
+						self.getPositionInfor()
+						self.timer()
+						self.isLogin = true
+					}).catch(function (err) {
+						alert('请输入正确的用户名跟密码')
+						console.log(err)
+					})
+				},
+				/* 获取列表信息 */
+				getStockDetail() {
+					this.stockDetail = [] // 清空列表数据
+					var self = this
+					axios.get('/warehouse/materialStockDetail/?warehouse_code=TubeWarehouse&materialType_code=&page_size=99999&ordering=update_time').then(function (response) {
+						self.stockDetail=response.data.results
+						self.parent = document.getElementById('parent')
+						self.child = document.getElementById('child')
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				/* 获取列表信息 */
+				getPositionInfor() {
+					this.positionInfor = [] // 清空列表数据
+					var self = this
+					axios.get('/warehouse/warehouse/3').then(function (response) {
+						self.positionInfor=response.data.warehouse_item
+					}).catch(function (err) {
+						if (err.request) {
+							alert(err.request.response)
+						} else {
+							console.log('Error', err.message)
+						}
+					})
+				},
+				timer() {
+					return setTimeout(() => {
+						this.roll()
+					}, 5000)
+				},
+				roll: function () {
+					if(this.parent.scrollTop >= this.child.scrollHeight-this.parent.clientHeight) {
+						this.getStockDetail()
+						this.getPositionInfor()
+					} else {
+						this.parent.scrollTop+=100
+					}
+					this.timer()
+				}
+			},
+			created() {
+				axios.defaults.timeout = 10000;
+				// 公用地址
+				axios.defaults.baseURL = 'http://119.3.254.254:8000/';
+				// 跨域携带cookie
+				axios.defaults.withCredentials = true;
+				// 给请求头加键值对
+				axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+			}
+		})
+	</script>
+		<style>
+			@media screen and (min-height: 96px) {
+				body {font-family: Verdana;font-size: 5px;}
+			}
+			@media screen and (min-height: 192px) {
+				body {font-family: Verdana;font-size: 10px;}
+			}
+			@media screen and (min-height: 288px) {
+				body {font-family: Verdana;font-size: 15px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 384px) {
+				body {font-family: Verdana;font-size: 20px;}/* 16*4.2 */
+			}
+			@media screen and (min-height: 480px) {
+				body {font-family: Verdana;font-size: 25px;}/* 18 *4.6*/
+			}
+			@media screen and (min-height: 576px) {
+				body {font-family: Verdana;font-size: 30px;}/* 20 *4.6 */
+			}
+			@media screen and (min-height: 672px) {
+				body {font-family: Verdana;font-size: 35px;}/* 22 *3.03*/
+			}
+			@media screen and (min-height: 768px) {
+				body {font-family: Verdana;font-size: 40px;}/* 24 */
+			}
+			@media screen and (min-height: 864px) {
+				body {font-family: Verdana;font-size: 45px;}/* 25 */
+			}
+			@media screen and (min-height: 960px) {
+				body {font-family: Verdana;font-size: 50px;} /* 28 */
+			}
+			@media screen and (min-height: 1056px) {
+				body {font-family: Verdana;font-size:55px;}/* 33 */
+			}
+			@media screen and (min-height: 1152px) {
+				body {font-family: Verdana;font-size:60px;}/* 33 */
+			}
+			@media screen and (min-height: 1248px) {
+				body {font-family: Verdana;font-size:65px;}/* 33 */
+			}
+			@media screen and (min-height: 1344px) {
+				body {font-family: Verdana;font-size:70px;}/* 33 */
+			}
+			@media screen and (min-height: 1400px) {
+				body {font-family: Verdana;font-size:75px;}/* 33 */
+			}
+			@media screen and (min-height: 1536px) {
+				body {font-family: Verdana;font-size:80px;}/* 33 */
+			}
+			@media screen and (min-height: 1632px) {
+				body {font-family: Verdana;font-size:85px;}/* 33 */
+			}
+			@media screen and (min-height: 1728px) {
+				body {font-family: Verdana;font-size:90px;}/* 33 */
+			}
+			@media screen and (min-height: 1824px) {
+				body {font-family: Verdana;font-size:95px;}/* 33 */
+			}
+			@media screen and (min-height: 1920px) {
+				body {font-family: Verdana;font-size:100px;}/* 33 */
+			}
+			*{
+				outline: none;
+			}
+			#app{
+				position: fixed;
+				width: 100%;
+				height: 100%;
+			}
+			.top {
+				position: absolute;
+				top: 0;
+				height: 6%;
+				width: 100%;
+				background: rgba(30, 30, 30, 0.6);
+				color: #ffffff;
+				letter-spacing: 0.19px;
+				text-shadow: 0 2px 4px rgba(255, 255, 255, 0.20);
+			}
+			.top img {
+              position: relative;
+			  height: 100%;
+			}
+			.top span {
+				position: absolute;
+				right: 0;
+				height: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				margin-right: 3em;
+				line-height: 2em;
+			}
+			.login{
+				position: absolute;
+				top: 6%;
+				width: 100%;
+				height: 94%;
+				overflow: scroll;
+				background: #252531;
+				text-align: center;
+				color: white;
+				font-weight: 300;
+				font-size: 1.1rem;
+			}
+			.main {
+				position: absolute;
+				top: 6%;
+				width: 100%;
+				height: 94%;
+				background-image: url(http://pic.yupoo.com/kane-zhang/9b0b7474/f956c8d1.jpg);
+			}
+			.main_t {
+				position: absolute;
+				width: 98%;
+				height: 48%;
+				margin: 1%;
+			}
+			.mian_t_lt {
+				position: absolute;
+				width: 39%;
+				height: 100%;
+				margin-right: 1%;
+				border-radius: 8px;
+			}
+			.mian_t_lt label{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+				text-align: center;
+				display: inline-block;
+			}
+			.mian_t_rt {
+				position: absolute;
+				width: 60%;
+				height: 100%;
+				right: 0;
+				border-radius: 8px;
+			}
+			.mian_t_rt label{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 10%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+				text-align: center;
+				display: inline-block;
+			}
+			ul{
+				display: block;
+				list-style-type: disc;
+				margin-block-start: 0;
+				margin-block-end: 0;
+				margin-inline-start: 0;
+				margin-inline-end: 0;
+				padding-inline-start: 0;
+			}
+			.mian_t_rt ul{
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 90%;
+			}
+			.mian_t_rt li{
+				float: left;
+				width: 4.8%;
+				height: 9.2%;
+				margin: 0.1%;
+				background: #FFE15B;
+				list-style-type:none;
+				font-size: 0.3em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+				text-align: center;
+			}
+			.main_b {
+				position: absolute;
+				width: 98%;
+				height: 48%;
+				top: 50%;
+				border-radius: 8px;
+				margin: 1%;
+			}
+			.main_b label{
+				position: absolute;
+				top: 0;
+				width: 100%;
+				font-size: 0.5em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+				text-align: center;
+				display: inline-block;
+			}
+			.main_b .table {
+				position: absolute;
+				top: 10%;
+				width: 100%;
+				height: 80%;
+				border-collapse: collapse;
+				overflow: auto;
+				border: 1px solid #eeeeee;
+			}
+            .main_b .table table{
+				position: relative;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.main_b .table th {
+				position: sticky;
+				top: 0;
+				background: #4d4d56;
+				border-bottom: 1px solid #eeeeee;
+				font-size: 0.4em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+			}
+			.main_b .table td {
+				font-size: 0.3em;
+				font-family: GurmukhiMN;
+				text-transform: uppercase;
+				line-height: 2em;
+				color: #ffffff;
+			}
+		</style>
+	</body>
+</html>
