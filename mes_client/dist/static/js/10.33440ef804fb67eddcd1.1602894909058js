@@ -1,0 +1,933 @@
+webpackJsonp([10],{
+
+/***/ "BluN":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+// EXTERNAL MODULE: ./node_modules/_vuelidate@0.7.5@vuelidate/lib/validators/index.js
+var validators = __webpack_require__("DhQT");
+var validators_default = /*#__PURE__*/__webpack_require__.n(validators);
+
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./src/views/home/content/production/SemifinishedData.vue
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var SemifinishedData = ({
+  name: 'semifinishedData',
+  components: {},
+  data: function data() {
+    return {
+      /* 视图显示控制 */
+      showViewid: 'list',
+      /* 列表页数据 */
+      list: [],
+      listCount: 0,
+      listPreUrl: '',
+      listNextUrl: '',
+      /* 列表页查询参数 */
+      selectItem: {
+        state: '',
+        semifinishedType: '',
+        taskType: '',
+        semifinished: '',
+        task: '',
+        create_user: '',
+        type: '',
+        searchValue: '',
+        start_time: '',
+        stop_time: ''
+      },
+      /* 列表页数据排序 */
+      ordering: '-id',
+      /* 详情页数据 */
+      detail: [],
+      type: {},
+      personnel: {},
+      level: {},
+      /* 详情页审核记录项表单 */
+      alterItem: {
+        desc: '',
+        uri: 'semifinishedData'
+      },
+      alterList: [],
+      alterData: [],
+      /* 详情页按钮显示控制 */
+      showSubmitBt: false,
+      showReturnBt: false,
+      showApprovedBt: false,
+      showDeleteBt: false,
+      /* 创建页表单项数据 */
+      formItem: {
+        id: '',
+        type: null,
+        semifinishedType: null,
+        semifinished: null,
+        taskType: null,
+        task: null,
+        batch: '',
+        sn: '',
+        personnel: '',
+        equipment: '',
+        material: '',
+        station: '',
+        quality: '',
+        dataTime: '',
+        file: [],
+        alter: [],
+        attribute1: '',
+        attribute2: '',
+        attribute3: '',
+        attribute4: '',
+        attribute5: '',
+        attribute6: '',
+        attribute7: '',
+        attribute8: '',
+        attribute9: '',
+        attribute10: '',
+        attribute11: '',
+        attribute12: '',
+        attribute13: '',
+        attribute14: '',
+        attribute15: '',
+        attribute16: '',
+        attribute17: '',
+        attribute18: '',
+        attribute19: '',
+        attribute20: '',
+        desc: '',
+        auditor: ''
+      },
+      /* 创建页文件项表单 */
+      fileItem: {
+        file: null,
+        fileName: '',
+        desc: '',
+        uri: 'semifinishedData'
+      },
+      fileData: [],
+      /* 半成品类型信息 */
+      semifinishedType: [],
+      /* 半成品信息 */
+      semifinishedInfor: [],
+      semifinishedInfor1: [],
+      /* 任务类型信息 */
+      taskType: [],
+      /* 任务信息 */
+      taskInfor: [],
+      /* 过程数据类型信息 */
+      typeInfor: [],
+      /* 具有审核权限的账号信息 */
+      userinfor: [],
+      /* 附加属性标题 */
+      attribute_title: {
+        attribute1: '',
+        attribute2: '',
+        attribute3: '',
+        attribute4: '',
+        attribute5: '',
+        attribute6: '',
+        attribute7: '',
+        attribute8: '',
+        attribute9: '',
+        attribute10: '',
+        attribute11: '',
+        attribute12: '',
+        attribute13: '',
+        attribute14: '',
+        attribute15: '',
+        attribute16: '',
+        attribute17: '',
+        attribute18: '',
+        attribute19: '',
+        attribute20: ''
+      }
+
+    };
+  },
+
+  validations: {
+    formItem: {
+      type: {
+        required: validators["required"]
+      },
+      dataTime: {
+        required: validators["required"]
+      }
+    }
+  },
+  methods: {
+    /* 显示列表视图 */
+    showListView: function showListView() {
+      this.list = []; // 清空列表数据
+      this.listCount = 0;
+      this.listPreUrl = '';
+      this.listNextUrl = '';
+      for (var key in this.selectItem) {
+        this.selectItem[key] = '';
+      }
+      var self = this;
+      this.$axios.get('production/semifinishedData/?ordering=' + self.ordering).then(function (response) {
+        self.list = response.data.results;
+        self.listCount = response.data.count;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+        self.showViewid = 'list';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    /* 列表查询数据 */
+    select: function select() {
+      this.list = []; // 清空列表数据
+      this.listCount = 0;
+      this.listPreUrl = '';
+      this.listNextUrl = '';
+      var self = this;
+      this.$axios.get('production/semifinishedData/?create_user=' + self.selectItem.create_user + '&semifinishedType_code=' + self.selectItem.semifinishedType + '&taskType_code=' + self.selectItem.taskType + '&semifinished_id=' + self.selectItem.semifinished + '&task_id=' + self.selectItem.task + '&type=' + self.selectItem.type + '&search=' + self.selectItem.searchValue + '&start_time=' + self.selectItem.start_time + '&stop_time=' + self.selectItem.stop_time + '&ordering=' + self.ordering).then(function (response) {
+        self.list = response.data.results;
+        self.listCount = response.data.count;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    listPre: function listPre() {
+      this.list = []; // 清空列表数据
+      var self = this;
+      this.$axios.get(this.listPreUrl).then(function (response) {
+        self.listPreUrl = '';
+        self.listNextUrl = '';
+        self.list = response.data.results;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    listNext: function listNext() {
+      this.list = []; // 清空列表数据
+      var self = this;
+      this.$axios.get(this.listNextUrl).then(function (response) {
+        self.listPreUrl = '';
+        self.listNextUrl = '';
+        self.list = response.data.results;
+        if (response.data.next !== null) {
+          self.listNextUrl = response.data.next.replace(self.$axios.defaults.baseURL, '');
+        }
+        if (response.data.previous !== null) {
+          self.listPreUrl = response.data.previous.replace(self.$axios.defaults.baseURL, '');
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示详情视图 */
+    showDetailView: function showDetailView(id) {
+      this.detail = []; // 清空详情数据
+      this.alterData = []; // 清空审核数据
+      this.type = {};
+      var self = this;
+      this.$axios.get('production/semifinishedData/' + id).then(function (response) {
+        self.detail = response.data;
+        self.type = self.detail.type;
+        self.formItem.type = self.detail.type.id;
+        self.showViewid = 'detail';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示创建视图 */
+    showCreatView: function showCreatView() {
+      /* 清空表单数据 */
+      for (var key in this.formItem) {
+        if (Object.prototype.toString.call(this.formItem[key]) === '[object Array]') {
+          this.formItem[key] = [];
+        } else if (Object.prototype.toString.call(this.formItem[key]) === '[object Object]') {
+          var obj = this.formItem[key];
+          for (var key1 in obj) {
+            if (Object.prototype.toString.call(obj[key1]) === '[object Array]') {
+              obj[key1] = [];
+            } else {
+              obj[key1] = '';
+            }
+          }
+        } else {
+          this.formItem[key] = '';
+        }
+      }
+      this.fileData = [];
+      this.showViewid = 'create';
+    },
+
+    /* 提交文件项 */
+    uploadFile: function uploadFile() {
+      if (!confirm('确认提交??')) {
+        return;
+      }
+      var formData = new FormData();
+      // 下面是表单绑定的data 数据
+      formData.append('uri', this.fileItem.uri);
+      formData.append('desc', this.fileItem.desc);
+      formData.append('file', this.fileItem.file);
+      var self = this;
+      this.$axios.post('production/file/', formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
+        var obj = { 'id': response.data.id,
+          'fileName': self.fileItem.fileName,
+          'fileUrl': response.data.file,
+          'desc': response.data.desc,
+          'uri': response.data.uri };
+        self.fileItem.file = null;
+        self.fileItem.desc = '';
+        self.formItem.file.push(response.data.id);
+        self.fileData.push(obj);
+        alert(self.fileItem.fileName + '文件提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    fileBeforeUpload: function fileBeforeUpload(event) {
+      this.fileItem.file = event.target.files[0];
+      this.fileItem.fileName = event.target.files[0].name;
+    },
+
+    removeFile: function removeFile(id) {
+      var self = this;
+      if (!confirm('是否要删除当前数据')) {
+        // 当用户点击的取消按钮的时候，应该阻断这个方法中的后面代码的继续执行
+        return;
+      }
+      for (var i = 0; i < self.formItem.file.length; i++) {
+        if (self.formItem.file[i] === id) {
+          self.formItem.file.splice(i, 1);
+        }
+      }
+      for (var j = 0; j < self.fileData.length; j++) {
+        if (self.fileData[j].id === id) {
+          self.fileData.splice(j, 1);
+        }
+      }
+    },
+    /* 保存表单数据 */
+    save: function save() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.post('production/semifinishedData/', {
+        type: self.formItem.type,
+        semifinished_id: self.formItem.semifinished,
+        task_id: self.formItem.task,
+        batch: self.formItem.batch,
+        sn: self.formItem.sn,
+        personnel: self.formItem.personnel,
+        equipment: self.formItem.equipment,
+        material: self.formItem.material,
+        station: self.formItem.station,
+        quality: self.formItem.quality,
+        dataTime: self.formItem.dataTime,
+        file: self.formItem.file,
+        attribute1: self.formItem.attribute1,
+        attribute2: self.formItem.attribute2,
+        attribute3: self.formItem.attribute3,
+        attribute4: self.formItem.attribute4,
+        attribute5: self.formItem.attribute5,
+        attribute6: self.formItem.attribute6,
+        attribute7: self.formItem.attribute7,
+        attribute8: self.formItem.attribute8,
+        attribute9: self.formItem.attribute9,
+        attribute10: self.formItem.attribute10,
+        attribute11: self.formItem.attribute11,
+        attribute12: self.formItem.attribute12,
+        attribute13: self.formItem.attribute13,
+        attribute14: self.formItem.attribute14,
+        attribute15: self.formItem.attribute15,
+        attribute16: self.formItem.attribute16,
+        attribute17: self.formItem.attribute17,
+        attribute18: self.formItem.attribute18,
+        attribute19: self.formItem.attribute19,
+        attribute20: self.formItem.attribute20,
+        desc: self.formItem.desc
+      }).then(function (response) {
+        self.formItem.file = [];
+        self.fileData = [];
+        alert('数据保存成功');
+      }).catch(function (error) {
+        if (error.request) {
+          alert(error.request.response);
+        } else {
+          console.log('Error', error.message);
+        }
+      });
+    },
+
+    /* 保存表单数据 */
+    removeData: function removeData(id) {
+      if (!confirm('确认删除??')) {
+        return;
+      }
+      var self = this;
+      this.$axios.delete('production/semifinishedData/' + id, {}).then(function (response) {
+        self.showListView();
+        alert('数据删除成功');
+      }).catch(function (error) {
+        if (error.request) {
+          alert(error.request.response);
+        } else {
+          console.log('Error', error.message);
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.userinfor = [];
+    this.typeInfor = [];
+    var self = this;
+    this.$axios.get('user/userInfor/?page_size=99999&ordering=-id').then(function (response) {
+      self.userinfor = response.data.results;
+      self.$axios.get('production/semifinishedDataType/?page_size=99999&ordering=-id&state=使用中').then(function (response) {
+        self.typeInfor = response.data.results;
+        self.$axios.get('process/semifinishedType/?page_size=99999&ordering=-id&state=使用中').then(function (response) {
+          self.semifinishedType = response.data.results;
+          self.$axios.get('plan/semifinishedTaskType/?page_size=99999&ordering=-id&state=使用中').then(function (response) {
+            self.taskType = response.data.results;
+            self.showListView();
+          }).catch(function (err) {
+            if (err.request) {
+              alert(err.request.response);
+            } else {
+              console.log('Error', err.message);
+            }
+          });
+        }).catch(function (err) {
+          if (err.request) {
+            alert(err.request.response);
+          } else {
+            console.log('Error', err.message);
+          }
+        });
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }).catch(function (err) {
+      if (err.request) {
+        alert(err.request.response);
+      } else {
+        console.log('Error', err.message);
+      }
+    });
+  },
+
+  computed: {
+    username: function username() {
+      return this.$store.getters.getLoginInfor.name;
+    },
+    is_superuser: function is_superuser() {
+      return this.$store.getters.getLoginInfor.is_superuser;
+    },
+    permissions: function permissions() {
+      return this.$store.getters.getLoginInfor.permissions;
+    },
+    canCreate: function canCreate() {
+      return 'production.add_semifinisheddatadefinitionmodel' in this.permissions;
+    },
+    canRead: function canRead() {
+      return 'production.read_semifinisheddatadefinitionmodel' in this.permissions;
+    },
+    canDelete: function canDelete() {
+      return 'production.delete_semifinisheddatadefinitionmodel' in this.permissions;
+    }
+  },
+  watch: {
+    formItem: {
+      deep: true
+    },
+    /* 监控用户选择的类别变化时,更新附加属性标题 */
+    'formItem.type': function formItemType(newval, oldval) {
+      var self = this;
+      for (var key in self.attribute_title) {
+        self.attribute_title[key] = '';
+      }
+      if (newval === undefined) {
+        return;
+      }
+      this.$axios.get('production/semifinishedDataType/' + newval).then(function (response) {
+        if (response.data.attach_attribute !== null) {
+          var result = response.data.attach_attribute.split(';');
+          if (result.length > 0) {
+            result.forEach(function (value, i) {
+              var data = value.split(':');
+              if (data.length === 2) {
+                self.attribute_title[data[0]] = data[1];
+              }
+            });
+          }
+        }
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    /**/
+    'formItem.semifinishedType': function formItemSemifinishedType(newval, oldval) {
+      var self = this;
+      this.semifinishedInfor = [];
+      if (newval === undefined) {
+        return;
+      }
+      this.$axios.get('process/semifinishedType/' + newval).then(function (response) {
+        self.semifinishedInfor = response.data.semifinishedType_item;
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    'formItem.taskType': function formItemTaskType(newval, oldval) {
+      var self = this;
+      this.taskInfor = [];
+      if (newval === undefined) {
+        return;
+      }
+      this.$axios.get('plan/semifinishedTaskType/' + newval).then(function (response) {
+        self.taskInfor = response.data.semifinishedTaskType_item;
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    'formItem.task': function formItemTask(newval, oldval) {
+      var self = this;
+      this.semifinishedInfor1 = [];
+      if (newval === undefined) {
+        return;
+      }
+      this.$axios.get('plan/semifinishedTaskCreate/' + newval).then(function (response) {
+        response.data.child.forEach(function (value, i) {
+          var obj;
+          obj = {
+            batch: value.salesOrderItem.batch,
+            id: value.salesOrderItem.id,
+            semifinishedType_code: value.salesOrderItem.semifinishedType_code,
+            semifinishedType_name: value.salesOrderItem.semifinishedType_name,
+            semifinished_code: value.salesOrderItem.semifinished_code,
+            semifinished_id: value.salesOrderItem.semifinished_id,
+            semifinished_name: value.salesOrderItem.semifinished_name
+          };
+          self.semifinishedInfor1.push(obj);
+        });
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    'formItem.semifinished': function formItemSemifinished(newval, oldval) {
+      var self = this;
+      if (newval === undefined) {
+        return;
+      }
+      this.semifinishedInfor1.forEach(function (value, i) {
+        if (newval === value.semifinished_id) {
+          self.formItem.batch = value.batch;
+        }
+      });
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler?{"id":"data-v-d7056830","hasScoped":true,"transformToRequire":{"video":["src","poster"],"source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./src/views/home/content/production/SemifinishedData.vue
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"semifinishedData"},[(_vm.showViewid==='list')?_c('div',{staticClass:"list"},[_c('div',{staticClass:"listHead"},[_c('form',{staticClass:"select"},[_c('div',[_vm._v("创建账号:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.create_user),expression:"selectItem.create_user"}],attrs:{"placeholder":"请选择创建账号"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "create_user", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.userinfor),function(item){return _c('option',{key:item.username,domProps:{"value":item.username}},[_vm._v(_vm._s(item.username))])}),0)]),_vm._v(" "),_c('div',[_vm._v("类型:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.type),expression:"selectItem.type"}],attrs:{"placeholder":"请选择类型"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "type", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.typeInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("任务类型:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.taskType),expression:"selectItem.taskType"}],attrs:{"placeholder":"请选择任务类型"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "taskType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.taskType),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("半成品类型:\n          "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.semifinishedType),expression:"selectItem.semifinishedType"}],attrs:{"placeholder":"请选择半成品类型"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.selectItem, "semifinishedType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.semifinishedType),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("开始时间:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.start_time),expression:"selectItem.start_time"}],attrs:{"type":"datetime-local","placeholder":"选择日期和时间"},domProps:{"value":(_vm.selectItem.start_time)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.selectItem, "start_time", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("结束时间:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.stop_time),expression:"selectItem.stop_time"}],attrs:{"type":"datetime-local","placeholder":"选择日期和时间"},domProps:{"value":(_vm.selectItem.stop_time)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.selectItem, "stop_time", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("关键字:\n          "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.selectItem.searchValue),expression:"selectItem.searchValue"}],attrs:{"type":"text","placeholder":"  请输入要搜索的信息..."},domProps:{"value":(_vm.selectItem.searchValue)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.selectItem, "searchValue", $event.target.value)}}})]),_vm._v(" "),_c('div',[_c('button',{attrs:{"type":"button"},on:{"click":_vm.select}},[_vm._v("搜索")])]),_vm._v(" "),_c('div',[_c('button',{staticStyle:{"background":"#FCC400","border":"none","left":"0"},attrs:{"type":"button"},on:{"click":_vm.showListView}},[_vm._v("重置")])])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{directives:[{name:"show",rawName:"v-show",value:(_vm.canCreate===true),expression:"canCreate===true"}],attrs:{"type":"button"},on:{"click":_vm.showCreatView}},[_vm._v("添加过程数据")])]),_vm._v(" "),_c('div',{staticClass:"ordering"},[_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"id","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"id")},on:{"change":function($event){_vm.ordering="id"}}}),_vm._v("\n          添加时间-正排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"-id","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"-id")},on:{"change":function($event){_vm.ordering="-id"}}}),_vm._v("\n          添加时间-倒排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"update_time","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"update_time")},on:{"change":function($event){_vm.ordering="update_time"}}}),_vm._v("\n          更新时间-正排序\n        ")]),_vm._v(" "),_c('div',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.ordering),expression:"ordering"}],attrs:{"value":"-update_time","type":"radio","name":"ordering"},domProps:{"checked":_vm._q(_vm.ordering,"-update_time")},on:{"change":function($event){_vm.ordering="-update_time"}}}),_vm._v("\n          更新时间-倒排序\n        ")])])]),_vm._v(" "),_c('div',{staticClass:"listTable"},[_c('div',{staticClass:"table"},[_c('table',[_vm._m(0),_vm._v(" "),_vm._l((_vm.list),function(item,index){return _c('tr',{key:item.id,attrs:{"align":"center","type":"height:1em"}},[_c('td',[_vm._v(_vm._s(index))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.type.name+"("+item.type.code+")"))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinishedType_name+"("+item.semifinishedType_code+")"))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.semifinished_name+"("+item.semifinished_code+")"))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.taskType_name+"("+item.taskType_code+")"))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.task_name+"("+item.task_code+")"))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.batch))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.sn))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.dataTime))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.create_user))]),_vm._v(" "),_c('td',[(item.create_user===_vm.username ||
+                _vm.canRead===true)?_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showDetailView(item.id)}}},[_vm._v("详情")]):_vm._e()])])}),_vm._v(" "),_c('tr')],2)]),_c('div',{staticClass:"page"},[_c('div',[_vm._v("总共："+_vm._s(_vm.listCount))]),_vm._v(" "),(_vm.listPreUrl!=='')?_c('button',{attrs:{"type":"button"},on:{"click":_vm.listPre}},[_vm._v("上一页")]):_vm._e(),_vm._v(" "),(_vm.listNextUrl!=='')?_c('button',{attrs:{"type":"button"},on:{"click":_vm.listNext}},[_vm._v("下一页")]):_vm._e()])])]):_vm._e(),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='detail'),expression:"showViewid==='detail'"}],staticClass:"detail"},[_c('div',{staticClass:"content"},[_c('ul',[_c('li',[_vm._v(_vm._s("类型:"+"　"+_vm.type.name+"("+_vm.type.code+")"))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("半成品类型:"+"　"+_vm.detail.semifinishedType_name+"("+_vm.detail.semifinishedType_code+")"))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("半成品:"+"　"+_vm.detail.semifinished_name+"("+_vm.detail.semifinished_code+")"))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("任务类型:"+"　"+_vm.detail.taskType_name+"("+_vm.detail.taskType_code+")"))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("任务:"+"　"+_vm.detail.task_name+"("+_vm.detail.task_code+")"))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("批次号:"+"　"+_vm.detail.batch))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("序列号:"+"　"+_vm.detail.sn))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("人员信息:"+"　"+_vm.detail.personnel))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("设备信息:"+"　"+_vm.detail.equipment))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("物料信息:"+"　"+_vm.detail.material))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("工位信息:"+"　"+_vm.detail.station))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("质检信息:"+"　"+_vm.detail.quality))]),_vm._v(" "),(_vm.attribute_title.attribute1!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute1 +":"+"　"+_vm.detail.attribute1))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute2!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute2 +":"+"　"+_vm.detail.attribute2))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute3!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute3 +":"+"　"+_vm.detail.attribute3))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute4!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute4 +":"+"　"+_vm.detail.attribute4))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute5!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute5 +":"+"　"+_vm.detail.attribute5))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute6!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute6 +":"+"　"+_vm.detail.attribute6))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute7!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute7 +":"+"　"+_vm.detail.attribute7))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute8!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute8 +":"+"　"+_vm.detail.attribute8))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute9!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute9 +":"+"　"+_vm.detail.attribute9))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute10!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute10 +":"+"　"+_vm.detail.attribute10))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute11!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute11 +":"+"　"+_vm.detail.attribute11))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute12!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute12 +":"+"　"+_vm.detail.attribute12))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute13!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute13 +":"+"　"+_vm.detail.attribute13))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute14!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute14 +":"+"　"+_vm.detail.attribute14))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute15!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute15 +":"+"　"+_vm.detail.attribute15))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute16!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute16 +":"+"　"+_vm.detail.attribute16))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute17!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute17 +":"+"　"+_vm.detail.attribute17))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute18!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute18 +":"+"　"+_vm.detail.attribute18))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute19!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute19 +":"+"　"+_vm.detail.attribute19))]):_vm._e(),_vm._v(" "),(_vm.attribute_title.attribute20!=='')?_c('li',[_vm._v(_vm._s(_vm.attribute_title.attribute20 +":"+"　"+_vm.detail.attribute20))]):_vm._e(),_vm._v(" "),_c('li',[_vm._v(_vm._s("创建账号:"+"　"+_vm.detail.create_user))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("记录时间:"+"　"+_vm.detail.dataTime))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("创建时间:"+"　"+_vm.detail.create_time))]),_vm._v(" "),_c('li',[_vm._v(_vm._s("备注信息:"+"　"+_vm.detail.desc))])]),_vm._v(" "),_c('dl',[_c('dt',[_vm._v("文件附件:")]),_vm._v(" "),_vm._l((_vm.detail.file),function(value,id){return [_c('a',{key:id,attrs:{"target":"_black","href":value.file}},[_vm._v(_vm._s(value.file_name))])]})],2)]),_vm._v(" "),_c('div',{staticClass:"button"},[(_vm.is_superuser===true||_vm.canRead===true)?_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.removeData(_vm.detail.id)}}},[_vm._v("删除")]):_vm._e(),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='create'),expression:"showViewid==='create'"}],staticClass:"create"},[_c('form',[_c('div',[_vm._v("类型:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.type),expression:"formItem.type"}],attrs:{"placeholder":"请选择类型"},on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "type", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.typeInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name+"("+item.code+")"))])}),0),_vm._v(" "),(!_vm.$v.formItem.type.required)?_c('span',{staticClass:"message"},[_vm._v("请选择类型")]):_vm._e()]),_vm._v(" "),_c('div',[_vm._v("任务类型:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.taskType),expression:"formItem.taskType"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "taskType", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.taskType),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name +"("+ item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("任务信息:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.task),expression:"formItem.task"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "task", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.taskInfor),function(item){return _c('option',{key:item.id,domProps:{"value":item.id}},[_vm._v(_vm._s(item.name +"("+ item.code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("半成品信息:\n        "),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.semifinished),expression:"formItem.semifinished"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.formItem, "semifinished", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.semifinishedInfor1),function(item,index){return _c('option',{key:index,domProps:{"value":item.semifinished_id}},[_vm._v(_vm._s(item.semifinished_name +"("+ item.semifinished_code+")"))])}),0)]),_vm._v(" "),_c('div',[_vm._v("批次号:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.batch),expression:"formItem.batch"}],attrs:{"placeholder":"请输入批次号..."},domProps:{"value":(_vm.formItem.batch)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "batch", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("序列号:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.sn),expression:"formItem.sn"}],attrs:{"placeholder":"请输入序列号..."},domProps:{"value":(_vm.formItem.sn)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "sn", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("人员信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.personnel),expression:"formItem.personnel"}],attrs:{"placeholder":"请输入当前的人员信息..."},domProps:{"value":(_vm.formItem.personnel)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "personnel", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("设备信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.equipment),expression:"formItem.equipment"}],attrs:{"placeholder":"请输入当前的设备信息..."},domProps:{"value":(_vm.formItem.equipment)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "equipment", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("物料信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.material),expression:"formItem.material"}],attrs:{"placeholder":"请输入当前的物料信息..."},domProps:{"value":(_vm.formItem.material)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "material", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("工位信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.station),expression:"formItem.station"}],attrs:{"placeholder":"请输入当前的工位信息..."},domProps:{"value":(_vm.formItem.station)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "station", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("质检信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.quality),expression:"formItem.quality"}],attrs:{"placeholder":"请输入当前的质检信息..."},domProps:{"value":(_vm.formItem.quality)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "quality", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("记录时间:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.dataTime),expression:"formItem.dataTime"}],attrs:{"type":"datetime-local","placeholder":"选择日期和时间"},domProps:{"value":(_vm.formItem.dataTime)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "dataTime", $event.target.value)}}}),_vm._v(" "),(!_vm.$v.formItem.dataTime.required)?_c('span',{staticClass:"message"},[_vm._v("请选择日期")]):_vm._e()]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute1!==''),expression:"attribute_title.attribute1!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute1)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute1),expression:"formItem.attribute1"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute1)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute1", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute2!==''),expression:"attribute_title.attribute2!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute2)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute2),expression:"formItem.attribute2"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute2)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute2", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute3!==''),expression:"attribute_title.attribute3!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute3)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute3),expression:"formItem.attribute3"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute3)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute3", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute4!==''),expression:"attribute_title.attribute4!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute4)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute4),expression:"formItem.attribute4"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute4)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute4", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute5!==''),expression:"attribute_title.attribute5!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute5)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute5),expression:"formItem.attribute5"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute5)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute5", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute6!==''),expression:"attribute_title.attribute6!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute6)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute6),expression:"formItem.attribute6"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute6)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute6", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute7!==''),expression:"attribute_title.attribute7!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute7)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute7),expression:"formItem.attribute7"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute7)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute7", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute8!==''),expression:"attribute_title.attribute8!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute8)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute8),expression:"formItem.attribute8"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute8)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute8", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute9!==''),expression:"attribute_title.attribute9!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute9)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute9),expression:"formItem.attribute9"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute9)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute9", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute10!==''),expression:"attribute_title.attribute10!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute10)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute10),expression:"formItem.attribute10"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute10)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute10", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute11!==''),expression:"attribute_title.attribute11!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute11)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute11),expression:"formItem.attribute11"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute11)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute11", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute12!==''),expression:"attribute_title.attribute12!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute12)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute12),expression:"formItem.attribute12"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute12)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute12", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute13!==''),expression:"attribute_title.attribute13!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute13)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute13),expression:"formItem.attribute13"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute13)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute13", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute14!==''),expression:"attribute_title.attribute14!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute14)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute14),expression:"formItem.attribute14"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute14)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute14", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute15!==''),expression:"attribute_title.attribute15!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute15)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute15),expression:"formItem.attribute15"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute15)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute15", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute16!==''),expression:"attribute_title.attribute16!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute16)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute16),expression:"formItem.attribute16"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute16)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute16", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute17!==''),expression:"attribute_title.attribute17!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute17)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute17),expression:"formItem.attribute17"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute17)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute17", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute18!==''),expression:"attribute_title.attribute18!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute18)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute18),expression:"formItem.attribute18"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute18)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute18", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute19!==''),expression:"attribute_title.attribute19!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute19)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute19),expression:"formItem.attribute19"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute19)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute19", $event.target.value)}}})]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.attribute_title.attribute20!==''),expression:"attribute_title.attribute20!==''"}]},[_vm._v(_vm._s(_vm.attribute_title.attribute20)+"\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.attribute20),expression:"formItem.attribute20"}],attrs:{"placeholder":"..."},domProps:{"value":(_vm.formItem.attribute20)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "attribute20", $event.target.value)}}})]),_vm._v(" "),_c('div',[_vm._v("备注信息:\n        "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.formItem.desc),expression:"formItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息"},domProps:{"value":(_vm.formItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.formItem, "desc", $event.target.value)}}})]),_vm._v(" "),_c('div',{staticClass:"annex"},[_vm._v("文件附件:\n        "),_c('ul',_vm._l((_vm.fileData),function(value){return _c('li',{key:value.id,on:{"click":function($event){return _vm.removeFile(value.id)}}},[_vm._v(_vm._s(value.fileName))])}),0),_vm._v(" "),_c('input',{attrs:{"type":"file"},on:{"change":_vm.fileBeforeUpload}}),_vm._v(" "),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.fileItem.desc),expression:"fileItem.desc"}],attrs:{"placeholder":"请输入当前的备注信息"},domProps:{"value":(_vm.fileItem.desc)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.fileItem, "desc", $event.target.value)}}}),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.uploadFile}},[_vm._v("上传")])])]),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.save}},[_vm._v("保存数据")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){_vm.showViewid='list'}}},[_vm._v("返回列表页")])])])])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('tr',{attrs:{"align":"center","type":"height:2em"}},[_c('th',[_vm._v("序号")]),_vm._v(" "),_c('th',[_vm._v("类型")]),_vm._v(" "),_c('th',[_vm._v("半成品类型")]),_vm._v(" "),_c('th',[_vm._v("半成品")]),_vm._v(" "),_c('th',[_vm._v("任务类型")]),_vm._v(" "),_c('th',[_vm._v("任务")]),_vm._v(" "),_c('th',[_vm._v("批次号")]),_vm._v(" "),_c('th',[_vm._v("序列号")]),_vm._v(" "),_c('th',[_vm._v("时间")]),_vm._v(" "),_c('th',[_vm._v("创建账号")]),_vm._v(" "),_c('th',[_vm._v("操作")])])}]
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ var production_SemifinishedData = (esExports);
+// CONCATENATED MODULE: ./src/views/home/content/production/SemifinishedData.vue
+function injectStyle (ssrContext) {
+  __webpack_require__("CycG")
+}
+var normalizeComponent = __webpack_require__("C7Lr")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-d7056830"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  SemifinishedData,
+  production_SemifinishedData,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ var content_production_SemifinishedData = __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+
+/***/ "CycG":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ })
+
+});

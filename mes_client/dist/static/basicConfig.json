@@ -1,3 +1,653 @@
 {
-  "BASE_URL": "http://119.3.254.254:8000"
+  "BASE_URL": "http://119.3.254.254:8000",
+  "attach_attribute":{
+          "维护记录子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "设备状态":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": "",
+            "attribute10": ""
+          },
+          "设备厂商":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "配件消耗记录":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "销售订单":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "销售订单子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品生产任务单":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品生产任务单子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": "",
+            "attribute10": "",
+            "attribute11": "",
+            "attribute12": "",
+            "attribute13": "",
+            "attribute14": "",
+            "attribute15": "",
+            "attribute16": "",
+            "attribute17": "",
+            "attribute18": "",
+            "attribute19": "",
+            "attribute20": ""
+          },
+          "半成品生产任务单":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品生产任务单子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": "",
+            "attribute10": "",
+            "attribute11": "",
+            "attribute12": "",
+            "attribute13": "",
+            "attribute14": "",
+            "attribute15": "",
+            "attribute16": "",
+            "attribute17": "",
+            "attribute18": "",
+            "attribute19": "",
+            "attribute20": ""
+          },
+          "采购需求单": {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "采购需求单子项": {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "物料管理计划":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "物料管理计划子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品管理计划":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品管理计划子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品管理计划":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品管理计划子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "设备维护计划":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "设备维护计划子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品生产日报记录":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品生产日报子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品生产日报记录":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品生产日报子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "班组信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "人员信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "考核等级":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "检验汇报子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "缺陷等级":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "仓库信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "设备管理":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "设备配件管理":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "物料管理":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品管理":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品管理":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "物料库存预警规则":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "物料库存预警规则子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品库存预警规则":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "半成品库存预警规则子项":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品库存预警规则":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "维护记录":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "配件信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "设备信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "供应商信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "客户信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "计量单位":
+          {
+            "attribute1": "测试１",
+            "attribute2": "测试２",
+            "attribute3": "测试３",
+            "attribute4": "测试４",
+            "attribute5": "测试５"
+          },
+          "物料信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": "",
+            "attribute10": ""
+          },
+          "半成品信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": "",
+            "attribute10": ""
+          },
+          "产品信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": "",
+            "attribute10": ""
+          },
+          "工位信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "生产路线信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "考核记录":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "车间信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "技能信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "产品过程记录":
+          {
+            "attribute1": "循环时间",
+            "attribute2": "结果",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": ""
+          },
+          "半成品过程记录":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": "",
+            "attribute6": "",
+            "attribute7": "",
+            "attribute8": "",
+            "attribute9": "",
+            "attribute10": "",
+            "attribute11": "",
+            "attribute12": "",
+            "attribute13": "",
+            "attribute14": "",
+            "attribute15": "",
+            "attribute16": "",
+            "attribute17": "",
+            "attribute18": "",
+            "attribute19": "",
+            "attribute20": ""
+          },
+          "检验汇报":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "缺陷信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "检验标准":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          },
+          "仓位信息":
+          {
+            "attribute1": "",
+            "attribute2": "",
+            "attribute3": "",
+            "attribute4": "",
+            "attribute5": ""
+          }
+        },
+  "function_select": {
+          "工艺管理": {
+            "enable":true,
+            "计量单位类型":true,
+            "计量单位信息":true,
+            "物料类型":true,
+            "物料信息":true,
+            "半成品类型":true,
+            "半成品信息":true,
+            "产品类型":true,
+            "产品信息":true,
+            "工位类型":true,
+            "工位信息":true,
+            "生产路线类型":true,
+            "生产路线":true,
+            "工艺看板": true
+          },
+          "仓库管理": {
+            "enable": true,
+            "仓库信息": true,
+            "仓位信息": true,
+            "设备管理": true,
+            "备品管理": true,
+            "物料管理": true,
+            "半成品管理": true,
+            "产品管理": true,
+            "设备库存": true,
+            "备品库存": true,
+            "物料库存": true,
+            "半成品库存": true,
+            "产品库存": true,
+            "物料预警规则": true,
+            "半成品预警规则": true,
+            "产品预警规则": true,
+            "仓库看板": true
+          },
+          "品质管理": {
+            "enable": true,
+            "缺陷类型": true,
+            "缺陷等级": true,
+            "缺陷信息": true,
+            "检验标准类型": true,
+            "检验标准信息": true,
+            "检验汇报类型": true,
+            "检验汇报": true,
+            "品质看板": true
+          },
+          "设备管理": {
+            "enable": true,
+            "设备厂商信息": true,
+            "备品类型": true,
+            "备品信息": true,
+            "设备类型": true,
+            "设备台账": true,
+            "维护记录类型": true,
+            "维护记录": true,
+            "备品消耗记录": true,
+            "设备状态信息": true,
+            "设备看板": true
+          },
+          "生产管理": {
+            "enable": true,
+            "车间信息": true,
+            "班组信息": true,
+            "技能类型": true,
+            "技能信息": true,
+            "人员信息": true,
+            "考核类型": true,
+            "考核等级": true,
+            "考核记录": true,
+            "半成品生产汇报": true,
+            "产品生产汇报": true,
+            "产品记录类型": true,
+            "半成品记录类型": true,
+            "产品过程数据": true,
+            "半成品过程数据": true,
+            "生产看板": true
+          },
+          "计划管理":{
+            "enable":  true,
+            "客户类型": true,
+            "客户信息": true,
+            "供应商类型": true,
+            "供应商信息": true,
+            "销售订单": true,
+            "产品生产任务类型": true,
+            "产品生产任务": true,
+            "半成品生产任务类型": true,
+            "半成品生产任务": true,
+            "物料需求": true,
+            "物料管理计划": true,
+            "产品管理计划": true,
+            "设备保养计划": true,
+            "计划看板": true
+          },
+          "精益管理": {
+            "enable": true
+          }
+  }
 }
+
+

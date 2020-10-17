@@ -1,0 +1,389 @@
+webpackJsonp([3],{
+
+/***/ "M5ug":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "QNvL":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+// EXTERNAL MODULE: ./node_modules/_vuelidate@0.7.5@vuelidate/lib/validators/index.js
+var validators = __webpack_require__("DhQT");
+var validators_default = /*#__PURE__*/__webpack_require__.n(validators);
+
+// CONCATENATED MODULE: ./node_modules/_babel-loader@7.1.5@babel-loader/lib!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=script&index=0!./src/views/home/content/user/UserAdmin.vue
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var UserAdmin = ({
+  name: 'userAdmin',
+  data: function data() {
+    return {
+      /* 视图显示控制 */
+      showViewid: 'list',
+      listStyle: {
+        width: '350px',
+        height: '350px'
+      },
+      /* 列表关键字 */
+      searchItem: '',
+      /* 列表页数据 */
+      list: [],
+      groupInfor: [], // 组穿梭框源数据
+      targetKeys1: [],
+      permisionInfor: [], // 权限穿梭框源数据
+      targetKeys2: [],
+      currentUser: '',
+      baseData: [], // 权限详情树结构元数据
+      groupName: ''
+    };
+  },
+
+  validations: {
+    formItem: {
+      code: {
+        required: validators["required"],
+        minLength: Object(validators["minLength"])(2),
+        maxLength: Object(validators["maxLength"])(32)
+      },
+      auditor: {
+        required: validators["required"]
+      }
+    }
+  },
+  methods: {
+    /* 显示列表视图 */
+    showListView: function showListView() {
+      this.list = []; // 清空列表数据
+      var self = this;
+      this.$axios.get('/user/userInfor/?auditor=' + self.username).then(function (response) {
+        self.list = response.data.results;
+        self.showViewid = 'list';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示授权视图 */
+    showAdminView: function showAdminView(index) {
+      /* 清空表单数据 */
+      this.groupInfor = [];
+      this.targetKeys1 = [];
+      this.permisionInfor = [];
+      this.targetKeys2 = [];
+      this.currentUser = index;
+      var self = this;
+      this.$axios.get('user/userInfor/' + index).then(function (response) {
+        response.data.groups.forEach(function (value, i) {
+          self.targetKeys1.push(value.id.toString());
+        });
+        response.data.user_permissions.forEach(function (value, i) {
+          self.targetKeys2.push(value.id.toString());
+        });
+        self.$axios.get('user/groupInfor/?page_size=99999&ordering=-id').then(function (response) {
+          for (var i = 0; i < response.data.results.length; i++) {
+            self.groupInfor.push({
+              key: response.data.results[i].id.toString(),
+              formItem: response.data.results[i].name,
+              description: ''
+            });
+          }
+          self.$axios.get('user/permissionInfor/?page_size=99999&ordering=-id').then(function (response) {
+            for (var _i = 0; _i < response.data.results.length; _i++) {
+              self.permisionInfor.push({
+                key: response.data.results[_i].id.toString(),
+                formItem: response.data.results[_i].name,
+                description: ''
+              });
+            }
+            self.showViewid = 'admin';
+          }).catch(function (err) {
+            if (err.request) {
+              alert(err.request.response);
+            } else {
+              console.log('Error', err.message);
+            }
+          });
+        }).catch(function (err) {
+          if (err.request) {
+            alert(err.request.response);
+          } else {
+            console.log('Error', err.message);
+          }
+        });
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 创建权限组 */
+    showCreateGroupView: function showCreateGroupView() {
+      /* 清空表单数据 */
+      this.permisionInfor = [];
+      this.targetKeys2 = [];
+      var self = this;
+      this.$axios.get('user/permissionInfor/?page_size=99999&ordering=-id').then(function (response) {
+        for (var i = 0; i < response.data.results.length; i++) {
+          self.permisionInfor.push({
+            key: response.data.results[i].id.toString(),
+            formItem: response.data.results[i].name,
+            description: ''
+          });
+        }
+        self.showViewid = 'createGroup';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 显示权限组详情视图 */
+    showGroupDetailView: function showGroupDetailView() {
+      /* 清空表单数据 */
+      this.baseData = [];
+      var self = this;
+      this.$axios.get('user/groupInfor/?page_size=99999&ordering=-id').then(function (response) {
+        for (var i = 0; i < response.data.results.length; i++) {
+          var permissions = response.data.results[i].permissions;
+          var children = [];
+          for (var j = 0; j < permissions.length; j++) {
+            children.push({ 'title': permissions[j].name, 'disableCheckbox': true });
+          }
+          var obj2 = { 'id': response.data.results[i].id, 'title': response.data.results[i].name, 'children': children, 'disableCheckbox': true };
+          self.baseData.push(obj2);
+        }
+        self.showViewid = 'groupDetail';
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 更新表单数据 */
+    update: function update() {
+      var self = this;
+      if (!confirm('确认保存??')) {
+        return;
+      }
+      this.$axios.put('user/userInfor/' + self.currentUser + '/', {
+        groups: self.targetKeys1,
+        user_permissions: self.targetKeys2
+      }).then(function (response) {
+        alert('数据提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+    handleChange1: function handleChange1(newTargetKeys, direction, moveKeys) {
+      this.targetKeys1 = newTargetKeys;
+    },
+    handleChange2: function handleChange2(newTargetKeys, direction, moveKeys) {
+      this.targetKeys2 = newTargetKeys;
+    },
+
+    /* 创建用户组 */
+    createGroup: function createGroup() {
+      var self = this;
+      this.$axios.post('user/groupInfor/', {
+        name: self.groupName,
+        permissions: self.targetKeys2
+      }).then(function (response) {
+        alert('数据提交成功');
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    },
+
+    /* 删除用户组 */
+    deleteGroup: function deleteGroup() {
+      var self = this;
+      var data = this.$refs.groupTree.getSelectedNodes();
+      if (data.length === 0) {
+        alert('请选择要删除的组名称');
+      }
+      if (data[0].hasOwnProperty('children') === false) {
+        alert('请选择要删除的组名称');
+        return;
+      }
+      this.$axios.delete('user/groupInfor/' + data[0].id).then(function (response) {
+        alert('数据提交成功');
+        self.showGroupDetailView();
+      }).catch(function (err) {
+        if (err.request) {
+          alert(err.request.response);
+        } else {
+          console.log('Error', err.message);
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.showListView();
+  },
+
+  computed: {
+    username: function username() {
+      return this.$store.getters.getLoginInfor.name;
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/_vue-loader@13.7.3@vue-loader/lib/template-compiler?{"id":"data-v-f345c6ae","hasScoped":true,"transformToRequire":{"video":["src","poster"],"source":"src","img":"src","image":"xlink:href"},"buble":{"transforms":{}}}!./node_modules/_vue-loader@13.7.3@vue-loader/lib/selector.js?type=template&index=0!./src/views/home/content/user/UserAdmin.vue
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"userAdmin"},[(_vm.showViewid==='list')?_c('div',{staticClass:"list"},[_c('table',[_c('caption',{attrs:{"align":"top"}},[_vm._v("可授权账号")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._l((_vm.list),function(item,index){return _c('tr',{key:item.id,attrs:{"align":"center","type":"height:1em"}},[_c('td',[_vm._v(_vm._s(index))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.username))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.job_number))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.post))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.email))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.wechat))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.mobile))]),_vm._v(" "),_c('td',[_vm._v(_vm._s(item.desc))]),_vm._v(" "),_c('td',[_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showAdminView(item.id)}}},[_vm._v("授权")])])])}),_vm._v(" "),_c('tr')],2)]):_vm._e(),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='admin'),expression:"showViewid==='admin'"}],staticClass:"admin"},[_c('form',[_c('div',[_c('Transfer',{attrs:{"data":_vm.groupInfor,"target-keys":_vm.targetKeys1,"render-format":_vm.render1,"list-style":_vm.listStyle,"titles":['源用户组','目标用户组']},on:{"on-change":_vm.handleChange1}})],1),_vm._v(" "),_c('div',[_c('Transfer',{attrs:{"data":_vm.permisionInfor,"target-keys":_vm.targetKeys2,"render-format":_vm.render2,"list-style":_vm.listStyle,"titles":['源权限','目标权限']},on:{"on-change":_vm.handleChange2}})],1),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.showCreateGroupView}},[_vm._v("创建权限组")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.showGroupDetailView}},[_vm._v("权限组详情")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.update}},[_vm._v("确认授权")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":_vm.showListView}},[_vm._v("返回列表页")])])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='createGroup'),expression:"showViewid==='createGroup'"}],staticClass:"create"},[_c('div',{staticClass:"name"},[_vm._v("组名称:\n        "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.groupName),expression:"groupName"}],attrs:{"placeholder":"请输入权限组名称..."},domProps:{"value":(_vm.groupName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.groupName=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"permission"},[_c('Transfer',{attrs:{"data":_vm.permisionInfor,"target-keys":_vm.targetKeys2,"render-format":_vm.render2,"list-style":_vm.listStyle,"titles":['源权限','目标权限']},on:{"on-change":_vm.handleChange2}})],1),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.createGroup}},[_vm._v("提交")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showAdminView(_vm.currentUser)}}},[_vm._v("返回授权页")])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showViewid==='groupDetail'),expression:"showViewid==='groupDetail'"}],staticClass:"groupDetail"},[_c('div',[_c('Tree',{ref:"groupTree",attrs:{"data":_vm.baseData}})],1),_vm._v(" "),_c('div',{staticClass:"button"},[_c('button',{attrs:{"type":"button"},on:{"click":_vm.deleteGroup}},[_vm._v("删除组")]),_vm._v(" "),_c('button',{attrs:{"type":"button"},on:{"click":function($event){return _vm.showAdminView(_vm.currentUser)}}},[_vm._v("返回授权页")])])])])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('tr',{attrs:{"align":"center","type":"height:2em"}},[_c('th',[_vm._v("序号")]),_vm._v(" "),_c('th',[_vm._v("用户名")]),_vm._v(" "),_c('th',[_vm._v("工号")]),_vm._v(" "),_c('th',[_vm._v("职位")]),_vm._v(" "),_c('th',[_vm._v("邮箱")]),_vm._v(" "),_c('th',[_vm._v("微信")]),_vm._v(" "),_c('th',[_vm._v("电话")]),_vm._v(" "),_c('th',[_vm._v("备注")]),_vm._v(" "),_c('th',[_vm._v("操作")])])}]
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ var user_UserAdmin = (esExports);
+// CONCATENATED MODULE: ./src/views/home/content/user/UserAdmin.vue
+function injectStyle (ssrContext) {
+  __webpack_require__("M5ug")
+}
+var normalizeComponent = __webpack_require__("C7Lr")
+/* script */
+
+
+/* template */
+
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-f345c6ae"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  UserAdmin,
+  user_UserAdmin,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ var content_user_UserAdmin = __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ })
+
+});
